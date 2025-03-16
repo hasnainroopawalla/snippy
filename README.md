@@ -1,0 +1,3 @@
+## AirClip
+
+`yarn && yarn start`

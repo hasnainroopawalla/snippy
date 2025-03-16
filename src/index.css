@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+/* TODO: Migrate more repeated stuff to theme. */
+@theme {
+  --font-mono: "Fira code", "Fira Mono", monospace;
+}
+
+body {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a {
+  @apply text-gray-800 dark:text-gray-100;
+}
