@@ -6,14 +6,14 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "install": "yarn codegen",
     "start": "vite",
     "preview": "vite preview",
     "build": "vite build",
     "lint": "eslint .",
     "test": "vitest",
     "test:unit": "vitest run",
-    "codegen": "graphql-codegen --config codegen.ts",
-    "codegen2": "DOTENV_CONFIG_PATH=./.env.development graphql-codegen -r dotenv/config --config codegen.ts"
+    "codegen": "DOTENV_CONFIG_PATH=./.env.development graphql-codegen -r dotenv/config --config codegen.ts"
   },
   "files": [
     "dist",

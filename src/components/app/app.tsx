@@ -9,7 +9,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { relayStylePagination } from "@apollo/client/utilities";
-import { ProfileByIdQueryDocument } from "../../graphql/graphql";
+import { getPasteByIdDocument } from "../../queries";
 
 const cache = new InMemoryCache({
   dataIdFromObject(responseObject) {
@@ -62,7 +62,7 @@ export const App: React.FC = () => (
 );
 
 const List = () => {
-  const { data, loading } = useQuery(ProfileByIdQueryDocument, {
+  const { data, loading } = useQuery(getPasteByIdDocument, {
     variables: {
       id: {
         eq: "2",
@@ -71,16 +71,6 @@ const List = () => {
   });
 
   console.log("graphql", data);
-
-  // React.useEffect(() => {
-  //   const fetch = async () => {
-  //     const { data, error } = await supabase.from("pastes").select("content");
-  //     console.log("data", data);
-  //     console.log("error", error);
-  //   };
-
-  //   fetch();
-  // });
 
   return (
     <div>
