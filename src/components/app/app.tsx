@@ -9,7 +9,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { relayStylePagination } from "@apollo/client/utilities";
-import { getPasteByIdDocument } from "../../queries";
+import { getPasteByIdDocument } from "../../graphql/queries";
 
 const cache = new InMemoryCache({
   dataIdFromObject(responseObject) {

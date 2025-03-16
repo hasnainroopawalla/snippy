@@ -1,4 +1,4 @@
-import { graphql } from "./graphql";
+import { graphql } from "./generated";
 
 export const getPasteByIdDocument = graphql(`
   query ProfileByIdQuery($id: BigIntFilter = { in: [] }) {

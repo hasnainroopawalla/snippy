@@ -17,7 +17,7 @@ const config: CodegenConfig = {
   overwrite: true,
   ignoreNoDocuments: true,
   generates: {
-    "src/graphql/": {
+    "src/graphql/generated/": {
       preset: "client",
       documentTransforms: [addTypenameSelectionDocumentTransform],
       plugins: [],
