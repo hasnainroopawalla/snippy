@@ -1,16 +1,74 @@
 import * as React from "react";
 import { Button, SelectWithLabel } from "../factory";
 import { ClipValidity, CLIP_VALIDITY } from "../../types";
+import {
+  ApolloClient,
+  InMemoryCache,
+  createHttpLink,
+  defaultDataIdFromObject,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import { relayStylePagination } from "@apollo/client/utilities";
+import { ClipService } from "../../services/clip-service";
+
+const cache = new InMemoryCache({
+  dataIdFromObject(responseObject) {
+    if ("nodeId" in responseObject) {
+      return `${responseObject.nodeId}`;
+    }
+
+    return defaultDataIdFromObject(responseObject);
+  },
+  possibleTypes: { Node: ["Pastes"] }, // optional, but useful to specify supertype-subtype relationships
+  typePolicies: {
+    Query: {
+      fields: {
+        todosCollection: relayStylePagination(), // example of paginating a collection
+        node: {
+          read(_, { args, toReference }) {
+            const ref = toReference({
+              nodeId: args?.nodeId,
+            });
+
+            return ref;
+          },
+        },
+      },
+    },
+  },
+});
+
+const httpLink = createHttpLink({
+  uri: import.meta.env.VITE_SUPABASE_URL,
+});
+
+const authLink = setContext(async (_, { headers }) => ({
+  headers: {
+    ...headers,
+    apiKey: import.meta.env.VITE_SUPABASE_API_KEY,
+    // Authorization: token ? `Bearer ${token}` : "",
+  },
+}));
+
+const apolloClient = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache,
+});
+
+const clipService = new ClipService({ apolloClient });
 
 export const NewClipForm: React.FC = () => {
   const validityRef = React.useRef<ClipValidity>("10m");
+
+  const onSubmit = React.useCallback(async () => {
+    clipService.getClipById("1").then(clip => console.log(clip));
+  }, []);
 
   return (
     <div className="flex flex-col gap-6">
       <OptionsPanel validityRef={validityRef} />
       <ContentEditor />
-      <ButtonsPanel />
-      <button onClick={() => console.log(validityRef.current)}>click</button>
+      <ButtonsPanel onSubmit={onSubmit} onClear={() => console.log("Clear!")} />
     </div>
   );
 };
@@ -47,9 +105,18 @@ const ContentEditor: React.FC = () => (
   </div>
 );
 
-const ButtonsPanel: React.FC = () => (
+type ButtonsPanelProps = {
+  onSubmit: () => void;
+  onClear: () => void;
+};
+
+const ButtonsPanel: React.FC<ButtonsPanelProps> = ({ onSubmit, onClear }) => (
   <div className="flex flex-row flex-wrap justify-start gap-4">
-    <Button variant="primary">Save</Button>
-    <Button variant="secondary">Clear</Button>
+    <Button variant="primary" onClick={onSubmit}>
+      Save
+    </Button>
+    <Button variant="secondary" onClick={onClear}>
+      Clear
+    </Button>
   </div>
 );

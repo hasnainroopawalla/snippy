@@ -7,6 +7,14 @@ export const CLIP_VALIDITY = {
 export type ClipValidity = keyof typeof CLIP_VALIDITY;
 
 export type IClip = {
-  validity: string;
+  /* The unique integer identifier of the clip in the DB */
+  id: string;
+  /* The unique, human readable identifier of the clip */
+  //   slug: string;
+  /* The validity of the clip after which the clip is deleted from the DB */
+  //   validity: string;
+  /* The raw string content of the clip */
   content: string;
+  /* The timestamp of when the clip was created */
+  createdAt: string;
 };

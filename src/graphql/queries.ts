@@ -1,7 +1,7 @@
 import { graphql } from "./generated";
 
-export const getClipByIdDocument = graphql(`
-  query GetClipByIdDocumentQuery($id: BigIntFilter! = { in: [] }) {
+export const GET_CLIP_BY_ID = graphql(`
+  query GetClipByIdQuery($id: BigIntFilter! = { in: [] }) {
     clipsCollection(filter: { id: $id }) {
       edges {
         node {
