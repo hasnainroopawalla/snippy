@@ -4,13 +4,13 @@ import { ChevronDownIcon } from "@radix-ui/react-icons";
 
 const Select = () => (
   <SelectFct.Root defaultValue="10">
-    <SelectFct.Trigger className="inline-flex h-[45px] text-md items-center justify-center gap-2 rounded bg-secondary-bg px-[15px] text-primary-text outline-none cursor-pointer">
+    <SelectFct.Trigger className="w-[150px] h-[45px] flex flex-row justify-between text-md items-center gap-2 rounded bg-secondary-bg px-[15px] text-primary-text cursor-pointer focus:outline-accent focus:outline-1">
       <SelectFct.Value />
       <SelectFct.Icon className="text-primary-text">
         <ChevronDownIcon />
       </SelectFct.Icon>
     </SelectFct.Trigger>
-    <SelectFct.Content className="overflow-hidden bg-secondary-bg rounded-md ring ring-hover">
+    <SelectFct.Content className="overflow-hidden rounded-md bg-secondary-bg ring ring-hover">
       <SelectFct.Viewport className="p-[7px]">
         <SelectFct.Group>
           <SelectItem value="10" text="10 minutes" />
@@ -43,7 +43,7 @@ type SelectWithLabelProps = {
 
 export const SelectWithLabel: React.FC<SelectWithLabelProps> = ({ label }) => (
   <div className="flex flex-col gap-2">
-    <span className="text-primary-text">{label}</span>
+    <span className="text-secondary-text">{label}</span>
     <Select />
   </div>
 );
