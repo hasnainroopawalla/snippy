@@ -2,8 +2,23 @@ import * as React from "react";
 import * as SelectFct from "@radix-ui/react-select";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 
-const Select = () => (
-  <SelectFct.Root defaultValue="10">
+type ISelectItem = { [key: string]: string };
+
+type SelectProps<T extends ISelectItem> = {
+  initialValue: keyof T;
+  items: T;
+  onItemSelect: (item: keyof T) => void;
+};
+
+const Select = <T extends ISelectItem>({
+  items,
+  onItemSelect,
+  initialValue,
+}: SelectProps<T>) => (
+  <SelectFct.Root
+    defaultValue={initialValue.toString()}
+    onValueChange={onItemSelect}
+  >
     <SelectFct.Trigger className="w-[150px] h-[45px] flex flex-row justify-between text-md items-center gap-2 rounded bg-secondary-bg px-[15px] text-primary-text cursor-pointer focus:outline-accent focus:outline-1">
       <SelectFct.Value />
       <SelectFct.Icon className="text-primary-text">
@@ -13,8 +28,9 @@ const Select = () => (
     <SelectFct.Content className="overflow-hidden rounded-md bg-secondary-bg ring ring-hover">
       <SelectFct.Viewport className="p-[7px]">
         <SelectFct.Group>
-          <SelectItem value="10" text="10 minutes" />
-          <SelectItem value="60" text="1 hour" />
+          {Object.entries(items).map(([value, text]) => (
+            <SelectItem key={value} value={value} text={text} />
+          ))}
         </SelectFct.Group>
       </SelectFct.Viewport>
     </SelectFct.Content>
@@ -37,13 +53,15 @@ const SelectItem: React.FC<SelectItemProps> = ({ value, text }) => (
   </SelectFct.Item>
 );
 
-type SelectWithLabelProps = {
+type SelectWithLabelProps<T extends ISelectItem> = SelectProps<T> & {
   label: string;
 };
 
-export const SelectWithLabel: React.FC<SelectWithLabelProps> = ({ label }) => (
+export const SelectWithLabel = <T extends ISelectItem>(
+  props: SelectWithLabelProps<T>
+) => (
   <div className="flex flex-col gap-2">
-    <span className="text-secondary-text">{label}</span>
-    <Select />
+    <span className="text-secondary-text">{props.label}</span>
+    <Select {...props} />
   </div>
 );

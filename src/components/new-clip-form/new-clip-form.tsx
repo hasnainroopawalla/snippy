@@ -1,21 +1,44 @@
 import * as React from "react";
 import { Button, SelectWithLabel } from "../factory";
+import { ClipValidity, CLIP_VALIDITY } from "../../types";
 
-// TODO: rename
-export const NewClipForm: React.FC = () => (
-  <div className="flex flex-col gap-6">
-    <OptionsPanel />
-    <ContentEditor />
-    <ButtonsPanel />
-  </div>
-);
+export const NewClipForm: React.FC = () => {
+  const validityRef = React.useRef<ClipValidity>("10m");
 
-const OptionsPanel: React.FC = () => (
-  <div className="flex flex-row flex-wrap gap-4">
-    <SelectWithLabel label="Validity" />
-    <SelectWithLabel label="Privacy" />
-  </div>
-);
+  return (
+    <div className="flex flex-col gap-6">
+      <OptionsPanel validityRef={validityRef} />
+      <ContentEditor />
+      <ButtonsPanel />
+      <button onClick={() => console.log(validityRef.current)}>click</button>
+    </div>
+  );
+};
+
+type OptionsPanelProps = {
+  validityRef: React.MutableRefObject<ClipValidity>;
+};
+
+const OptionsPanel: React.FC<OptionsPanelProps> = ({ validityRef }) => {
+  const onValiditySelected = React.useCallback(
+    (validity: ClipValidity) => {
+      validityRef.current = validity;
+    },
+    [validityRef]
+  );
+
+  return (
+    <div className="flex flex-row flex-wrap gap-4">
+      <SelectWithLabel
+        label="Validity"
+        items={CLIP_VALIDITY}
+        onItemSelect={onValiditySelected}
+        initialValue={validityRef.current}
+      />
+      {/* <SelectWithLabel label="Privacy" /> */}
+    </div>
+  );
+};
 
 const ContentEditor: React.FC = () => (
   <div className="flex flex-col gap-2">
