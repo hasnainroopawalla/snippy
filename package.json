@@ -1,8 +1,8 @@
 {
-  "name": "airclip",
+  "name": "snippy",
   "version": "0.0.1",
   "description": "",
-  "repository": "https://github.com/hasnainroopawalla/airclip",
+  "repository": "https://github.com/hasnainroopawalla/snippy",
   "private": true,
   "type": "module",
   "scripts": {
