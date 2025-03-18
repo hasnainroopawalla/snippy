@@ -16,6 +16,7 @@
   --color-secondary-text: #b0b3b8;
   --color-accent: #4338ca;
   --color-accent-hover: #362c9e;
+  --color-error: #d64545;
 }
 
 body {
