@@ -12,7 +12,7 @@ export const ContentEditor: React.FC<ContentEditorProps> = ({
     <textarea
       ref={contentEditorRef}
       placeholder="Paste or type here.."
-      className="w-full h-[300px] p-2 tracking-wide rounded bg-secondary-bg text-primary-text focus:outline-accent focus:outline-1"
+      className="w-full h-[150px] p-2 tracking-wide rounded bg-secondary-bg text-primary-text focus:outline-accent focus:outline-1"
     />
   </div>
 );

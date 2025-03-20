@@ -27,8 +27,4 @@ export const Route = createFileRoute("/$snippetSlug")({
   pendingComponent: () => <span>Loading</span>,
 
   notFoundComponent: () => <span>Not found!</span>,
-
-  errorComponent: e => (
-    <span className="text-primary-text">Error {e.error.message}</span>
-  ),
 });
