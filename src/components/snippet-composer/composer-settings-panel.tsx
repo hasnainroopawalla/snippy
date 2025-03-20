@@ -2,18 +2,18 @@ import * as React from "react";
 import { SelectWithLabel } from "../factory";
 import { SnippetValidity, SNIPPET_VALIDITY } from "../../types";
 
-type SettingsPanelProps = {
+type ComposerSettingsPanelProps = {
   validityRef: React.MutableRefObject<SnippetValidity>;
 };
 
-export const SettingsPanel: React.FC<SettingsPanelProps> = ({
+export const ComposerSettingsPanel: React.FC<ComposerSettingsPanelProps> = ({
   validityRef,
 }) => {
   const onValiditySelected = React.useCallback(
     (validity: SnippetValidity) => {
       validityRef.current = validity;
     },
-    [validityRef]
+    [validityRef],
   );
 
   return (

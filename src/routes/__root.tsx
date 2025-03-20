@@ -1,5 +1,5 @@
 import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
-import { IServicesContext } from "../contexts/services-context";
+import type { IServicesContext } from "../contexts/services-context";
 
 export type IRootRouterWithContext = { services: IServicesContext };
 

@@ -5,6 +5,9 @@ export const CREATE_SNIPPET_MUTATION = graphql(`
     insertIntosnippetsCollection(objects: { content: $content, slug: $slug }) {
       records {
         id
+        created_at
+        content
+        slug
       }
     }
   }

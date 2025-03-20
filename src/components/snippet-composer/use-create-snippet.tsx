@@ -11,11 +11,11 @@ export const useCreateSnippet = () => {
     async (props: ICreateSnippetFormData) => {
       setIsLoading(true);
 
-      snippetService.createSnippet(props).finally(() => {
+      return snippetService.createSnippet(props).finally(() => {
         setIsLoading(false);
       });
     },
-    [snippetService]
+    [snippetService],
   );
 
   return { createSnippet, isLoading };

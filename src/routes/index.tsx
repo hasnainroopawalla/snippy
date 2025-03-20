@@ -1,9 +1,9 @@
 import * as React from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { NewSnippetForm } from "../components";
+import { SnippetComposer } from "../components";
 
-const NewSnippetPage: React.FC = () => <NewSnippetForm />;
+const SnippetComposerPage: React.FC = () => <SnippetComposer />;
 
 export const Route = createFileRoute("/")({
-  component: NewSnippetPage,
+  component: SnippetComposerPage,
 });

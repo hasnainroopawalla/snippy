@@ -14,3 +14,18 @@ export const GET_SNIPPET_BY_ID_QUERY = graphql(`
     }
   }
 `);
+
+export const GET_SNIPPET_BY_SLUG_QUERY = graphql(`
+  query GetSnippetBySlug($slug: StringFilter! = { eq: "" }) {
+    snippetsCollection(filter: { slug: $slug }) {
+      edges {
+        node {
+          id
+          content
+          created_at
+          slug
+        }
+      }
+    }
+  }
+`);

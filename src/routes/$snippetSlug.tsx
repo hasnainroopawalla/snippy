@@ -1,12 +1,15 @@
 import * as React from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { SnippetViewer, SnippetNotFound } from "../components";
 
 const SnippetPage: React.FC = () => {
   const { snippetSlug } = Route.useParams();
 
   const { snippet } = Route.useLoaderData();
 
-  return <span className="text-primary-text">{snippet?.content}</span>;
+  return (
+    <>{snippet ? <SnippetViewer snippet={snippet} /> : <SnippetNotFound />}</>
+  );
 };
 
 export const Route = createFileRoute("/$snippetSlug")({
@@ -16,7 +19,7 @@ export const Route = createFileRoute("/$snippetSlug")({
       services: { snippetService },
     } = context;
 
-    const snippet = await snippetService.getSnippetById("582");
+    const snippet = await snippetService.getSnippetBySlug(params.snippetSlug);
 
     return { snippet };
   },

@@ -1,7 +1,11 @@
 import type { ApolloClient, NormalizedCacheObject } from "@apollo/client";
-import { CREATE_SNIPPET_MUTATION, GET_SNIPPET_BY_ID_QUERY } from "../graphql";
+import {
+  CREATE_SNIPPET_MUTATION,
+  GET_SNIPPET_BY_ID_QUERY,
+  GET_SNIPPET_BY_SLUG_QUERY,
+} from "../graphql";
 import type { ICreateSnippetFormData, ISnippet } from "../types";
-import { apolloGetSnippetQueryResultAdapter } from "./adapters";
+import { MutationResultAdapters, QueryResultAdapters } from "./adapters";
 import type { SlugService } from "./slug-service";
 
 type SnippetServiceProps = {
@@ -18,16 +22,20 @@ export class SnippetService {
     this.slugService = props.slugService;
   }
 
-  public async createSnippet(variables: ICreateSnippetFormData) {
+  public async createSnippet(
+    variables: ICreateSnippetFormData,
+  ): Promise<ISnippet | null> {
     const slug = this.slugService.generate();
 
-    return this.apolloClient.mutate({
-      mutation: CREATE_SNIPPET_MUTATION,
-      variables: {
-        ...variables,
-        slug,
-      },
-    });
+    return this.apolloClient
+      .mutate({
+        mutation: CREATE_SNIPPET_MUTATION,
+        variables: {
+          ...variables,
+          slug,
+        },
+      })
+      .then(result => MutationResultAdapters.createSnippet(result));
   }
 
   public updateSnippet() {}
@@ -42,15 +50,20 @@ export class SnippetService {
           },
         },
       })
-      .then(result => {
-        const snippet = apolloGetSnippetQueryResultAdapter(result.data);
+      .then(result => QueryResultAdapters.getSnippet(result));
+  }
 
-        if (!snippet) {
-          throw new Error("Snippet does not exist!");
-        }
-
-        return snippet;
-      });
+  public async getSnippetBySlug(slug: string): Promise<ISnippet | null> {
+    return this.apolloClient
+      .query({
+        query: GET_SNIPPET_BY_SLUG_QUERY,
+        variables: {
+          slug: {
+            eq: slug,
+          },
+        },
+      })
+      .then(result => QueryResultAdapters.getSnippet(result));
   }
 
   public deleteSnippet() {}

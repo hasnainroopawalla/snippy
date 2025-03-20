@@ -11,8 +11,8 @@ export type ISnippet = {
   id: string;
   /* The unique, human readable identifier of the Snippet */
   slug: string;
-  /* The validity of the Snippet after which it is deleted from the DB */
-  validity: string;
+  // /* The validity of the Snippet after which it is deleted from the DB */
+  // validity: string;
   /* The raw string content of the Snippet */
   content: string;
   /* The timestamp of when the Snippet was created */

@@ -2,14 +2,17 @@ import * as React from "react";
 import { SnippetValidity } from "../../types";
 import { ButtonsPanel } from "./buttons-panel";
 import { ContentEditor } from "./content-editor";
-import { SettingsPanel } from "./settings-panel";
+import { ComposerSettingsPanel } from "./composer-settings-panel";
 import { isNewSnippetDataValid, useCreateSnippet } from "./use-create-snippet";
+import { useNavigate } from "@tanstack/react-router";
 
-export const NewSnippetForm: React.FC = () => {
+export const SnippetComposer: React.FC = () => {
   const validityRef = React.useRef<SnippetValidity>("1h");
   const contentEditorRef = React.useRef<HTMLTextAreaElement>(null);
 
   const { createSnippet, isLoading } = useCreateSnippet();
+
+  const navigate = useNavigate();
 
   const onSubmit = React.useCallback(() => {
     const snippetData = {
@@ -22,8 +25,15 @@ export const NewSnippetForm: React.FC = () => {
       return;
     }
 
-    createSnippet(snippetData);
-  }, [createSnippet]);
+    createSnippet(snippetData).then(snippet => {
+      if (!snippet) {
+        console.log("Snippet not created");
+        return;
+      }
+
+      navigate({ to: "/$snippetSlug", params: { snippetSlug: snippet.slug } });
+    });
+  }, [createSnippet, navigate]);
 
   const onClear = React.useCallback(() => {
     if (contentEditorRef.current) {
@@ -33,7 +43,7 @@ export const NewSnippetForm: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      <SettingsPanel validityRef={validityRef} />
+      <ComposerSettingsPanel validityRef={validityRef} />
       <ContentEditor contentEditorRef={contentEditorRef} />
       <ButtonsPanel
         onSubmit={onSubmit}
