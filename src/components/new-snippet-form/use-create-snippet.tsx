@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useServices } from "../../contexts";
-import type { ICreateSnippetProps } from "../../types";
+import type { ICreateSnippetFormData } from "../../types";
 
 export const useCreateSnippet = () => {
   const { snippetService } = useServices();
@@ -8,7 +8,7 @@ export const useCreateSnippet = () => {
   const [isLoading, setIsLoading] = React.useState(false);
 
   const createSnippet = React.useCallback(
-    async (props: ICreateSnippetProps) => {
+    async (props: ICreateSnippetFormData) => {
       setIsLoading(true);
 
       snippetService.createSnippet(props).finally(() => {
@@ -21,5 +21,5 @@ export const useCreateSnippet = () => {
   return { createSnippet, isLoading };
 };
 
-export const isNewSnippetDataValid = (snippetData: ICreateSnippetProps) =>
+export const isNewSnippetDataValid = (snippetData: ICreateSnippetFormData) =>
   snippetData.content.length > 0;

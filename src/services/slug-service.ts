@@ -1,5 +1,7 @@
 export class SlugService {
   constructor() {}
 
-  public generateSlug() {}
+  public generate(): string {
+    return Math.random().toString();
+  }
 }

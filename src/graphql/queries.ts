@@ -8,6 +8,7 @@ export const GET_SNIPPET_BY_ID_QUERY = graphql(`
           id
           content
           created_at
+          slug
         }
       }
     }

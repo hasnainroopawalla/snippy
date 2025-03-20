@@ -19,6 +19,10 @@
   --color-error: #d64545;
 }
 
-body {
+/* body {
   @apply bg-primary-light-bg dark:bg-primary-bg;
+} */
+
+body {
+  @apply bg-primary-bg;
 }

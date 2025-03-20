@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SnippetService } from "../services";
+import { SnippetService, SlugService } from "../services";
 import apolloClient from "../apollo-client";
 
 type IServicesContext = {
@@ -11,10 +11,13 @@ const ServicesContext = React.createContext<IServicesContext>(
 );
 
 export const ServicesProvider = ({ children }: React.PropsWithChildren) => {
-  const services = React.useMemo(
-    () => ({ snippetService: new SnippetService({ apolloClient }) }),
-    []
-  );
+  const services = React.useMemo(() => {
+    const slugService = new SlugService();
+
+    return {
+      snippetService: new SnippetService({ apolloClient, slugService }),
+    };
+  }, []);
 
   return (
     <ServicesContext.Provider value={services}>
