@@ -4,6 +4,12 @@ export const SNIPPET_VALIDITY = {
   "1d": "1 day",
 };
 
+export const validityToMinutesMap: Record<SnippetValidity, number> = {
+  "10m": 10,
+  "1h": 60,
+  "1d": 1440,
+};
+
 export type SnippetValidity = keyof typeof SNIPPET_VALIDITY;
 
 export type ISnippet = {

@@ -58,7 +58,7 @@ type SelectWithLabelProps<T extends ISelectItem> = SelectProps<T> & {
 };
 
 export const SelectWithLabel = <T extends ISelectItem>(
-  props: SelectWithLabelProps<T>
+  props: SelectWithLabelProps<T>,
 ) => (
   <div className="flex flex-col gap-2">
     <span className="text-secondary-text">{props.label}</span>
