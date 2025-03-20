@@ -1,5 +1,11 @@
-import { createRoot } from "react-dom/client";
 import "./index.css";
-import { App } from "./components";
+import ReactDOM from "react-dom/client";
+import { ContextualApp } from "./app";
 
-createRoot(document.getElementById("root") as HTMLElement).render(<App />);
+const rootElement = document.getElementById("root") as HTMLElement;
+
+if (!rootElement.innerHTML) {
+  const root = ReactDOM.createRoot(rootElement);
+
+  root.render(<ContextualApp />);
+}

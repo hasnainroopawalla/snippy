@@ -42,7 +42,15 @@ export class SnippetService {
           },
         },
       })
-      .then(result => apolloGetSnippetQueryResultAdapter(result.data));
+      .then(result => {
+        const snippet = apolloGetSnippetQueryResultAdapter(result.data);
+
+        if (!snippet) {
+          throw new Error("Snippet does not exist!");
+        }
+
+        return snippet;
+      });
   }
 
   public deleteSnippet() {}

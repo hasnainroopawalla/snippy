@@ -2,12 +2,12 @@ import * as React from "react";
 import { SnippetService, SlugService } from "../services";
 import apolloClient from "../apollo-client";
 
-type IServicesContext = {
+export type IServicesContext = {
   snippetService: SnippetService;
 };
 
 const ServicesContext = React.createContext<IServicesContext>(
-  {} as IServicesContext
+  {} as IServicesContext,
 );
 
 export const ServicesProvider = ({ children }: React.PropsWithChildren) => {
