@@ -5,15 +5,23 @@ import { ContentViewer } from "./content-viewer";
 
 type SnippetViewerProps = { snippet: ISnippet };
 
-export const SnippetViewer: React.FC<SnippetViewerProps> = ({ snippet }) => (
-  <div className="flex flex-col gap-8">
-    <ViewerToolbar />
-    <div className="flex flex-col gap-3">
-      <ContentViewer slug={snippet.slug} content={snippet.content} />
-      <SnippetMetadata />
+export const SnippetViewer: React.FC<SnippetViewerProps> = ({ snippet }) => {
+  const contentViewerRef = React.useRef<HTMLTextAreaElement>(null);
+
+  return (
+    <div className="flex flex-col gap-8">
+      <ViewerToolbar contentViewerRef={contentViewerRef} />
+      <div className="flex flex-col gap-3">
+        <ContentViewer
+          contentViewerRef={contentViewerRef}
+          slug={snippet.slug}
+          content={snippet.content}
+        />
+        <SnippetMetadata />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 // TODO
 const SnippetMetadata: React.FC = () => (

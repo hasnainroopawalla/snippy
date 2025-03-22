@@ -32,9 +32,16 @@ export const useButtonTextUpdateOnClick = (props: {
   );
 
   const onClickWithTextUpdate = React.useCallback(() => {
+    if (timeoutRef.current) {
+      return;
+    }
+
     setText(postClickText);
 
-    timeoutRef.current = setTimeout(() => setText(text), updateTimeoutInMs);
+    timeoutRef.current = setTimeout(() => {
+      setText(text);
+      timeoutRef.current = null;
+    }, updateTimeoutInMs);
 
     callback();
   }, [callback, text, postClickText, updateTimeoutInMs]);

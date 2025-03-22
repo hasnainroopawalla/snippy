@@ -39,23 +39,24 @@ export const ComposerToolbar: React.FC<ComposerToolbarProps> = ({
           initialValue={validityRef.current}
         />
       </div>
-      <MinuteChange validity={validity} />
+      <ExpirationInfoBanner validity={validity} />
     </div>
   );
 };
 
-// TODO: rename
-type MinuteChangeProps = {
+type ExpirationInfoBannerProps = {
   validity: SnippetValidity;
 };
 
-const MinuteChange: React.FC<MinuteChangeProps> = ({ validity }) => {
+const ExpirationInfoBanner: React.FC<ExpirationInfoBannerProps> = ({
+  validity,
+}) => {
   const renderToken = useMinuteTick();
 
   const expiresOn = React.useMemo(
     () =>
       convertDateToString(
-        addMinutesToDate(new Date(), validityToMinutesMap[validity]),
+        addMinutesToDate(new Date() /* now */, validityToMinutesMap[validity]),
       ),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [validity, renderToken],

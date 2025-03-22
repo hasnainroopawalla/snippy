@@ -57,27 +57,37 @@ type BadgeButtonProps = {
 export const BadgeButton: React.FC<BadgeButtonProps> = ({
   variant,
   size,
-  text: initialText,
+  text,
   onClick,
-}) => {
+}) => (
+  <span
+    className={classNames(
+      "inline-flex items-center px-3 rounded-md cursor-pointer text-primary-text",
+      size === "large" ? "py-2 text-sm" : " py-1 text-xs",
+      variant === "primary"
+        ? "bg-accent hover:bg-accent-offset"
+        : "bg-secondary-bg hover:bg-primary-bg",
+    )}
+    onClick={onClick}
+  >
+    {text}
+  </span>
+);
+
+type BadgeButtonWithAutoTextUpdateProps = BadgeButtonProps & {
+  postClickText: string;
+};
+
+export const BadgeButtonWithAutoTextUpdate: React.FC<
+  BadgeButtonWithAutoTextUpdateProps
+> = ({ postClickText, onClick, text: initialText, ...props }) => {
   const { onClickWithTextUpdate, buttonText } = useButtonTextUpdateOnClick({
     callback: onClick,
     initialText,
-    postClickText: "Copied!",
+    postClickText,
   });
 
   return (
-    <span
-      className={classNames(
-        "inline-flex items-center px-3 rounded-md cursor-pointer text-primary-text",
-        size === "large" ? "py-2 text-sm" : " py-1 text-xs",
-        variant === "primary"
-          ? "bg-accent hover:bg-accent-offset"
-          : "bg-secondary-bg hover:bg-primary-bg",
-      )}
-      onClick={onClickWithTextUpdate}
-    >
-      {buttonText}
-    </span>
+    <BadgeButton onClick={onClickWithTextUpdate} text={buttonText} {...props} />
   );
 };

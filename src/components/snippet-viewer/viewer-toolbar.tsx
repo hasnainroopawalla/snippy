@@ -1,19 +1,37 @@
 import * as React from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { BadgeButton } from "../factory";
+import { BadgeButtonWithAutoTextUpdate } from "../factory";
+import { copyToClipboard } from "../../utils";
 
-export const ViewerToolbar: React.FC = () => {
+type ViewerToolbarProps = {
+  contentViewerRef: React.RefObject<HTMLTextAreaElement>;
+};
+
+export const ViewerToolbar: React.FC<ViewerToolbarProps> = ({
+  contentViewerRef,
+}) => {
   const navigate = useNavigate();
 
   const onClickNew = React.useCallback(() => navigate({ to: "/" }), [navigate]);
 
+  const onClickCopyText = React.useCallback(() => {
+    const contentViewerValue = contentViewerRef.current?.value;
+
+    if (!contentViewerValue) {
+      return;
+    }
+
+    copyToClipboard(contentViewerValue).catch(e => console.error(e));
+  }, [contentViewerRef]);
+
   return (
     <div className="flex flex-row flex-wrap items-center gap-4">
-      <BadgeButton
+      <BadgeButtonWithAutoTextUpdate
         variant="primary"
         size="large"
         text="Copy Text"
-        onClick={() => console.log("Copy Text")}
+        onClick={onClickCopyText}
+        postClickText="Copied!"
       />
       <ToolbarItem label="New" onClick={onClickNew} />
       <ToolbarItem label="Delete" onClick={() => {}} />
