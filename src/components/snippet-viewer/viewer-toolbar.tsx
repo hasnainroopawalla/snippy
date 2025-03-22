@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useNavigate } from "@tanstack/react-router";
+import { BadgeButton } from "../factory";
 
 export const ViewerToolbar: React.FC = () => {
   const navigate = useNavigate();
@@ -7,10 +8,13 @@ export const ViewerToolbar: React.FC = () => {
   const onClickNew = React.useCallback(() => navigate({ to: "/" }), [navigate]);
 
   return (
-    <div className="flex flex-row flex-wrap gap-4">
-      <span className="inline-flex items-center px-3 py-1 text-sm rounded-md cursor-pointer bg-accent hover:bg-accent-hover text-primary-text">
-        Copy Content
-      </span>
+    <div className="flex flex-row flex-wrap items-center gap-4">
+      <BadgeButton
+        variant="primary"
+        size="large"
+        text="Copy Text"
+        onClick={() => console.log("Copy Text")}
+      />
       <ToolbarItem label="New" onClick={onClickNew} />
       <ToolbarItem label="Delete" onClick={() => {}} />
     </div>

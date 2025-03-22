@@ -1,8 +1,11 @@
 import * as React from "react";
 import classNames from "classnames";
+import { useButtonTextUpdateOnClick } from "./hooks";
+
+type ButtonVariant = "primary" | "secondary";
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant: "primary" | "secondary";
+  variant: ButtonVariant;
   isLoading?: boolean; // New prop for loading state
 };
 
@@ -16,9 +19,9 @@ export const Button: React.FC<ButtonProps> = ({
     className={classNames(
       "px-4 py-2 transition duration-200 w-[100px] rounded focus:outline-1 text-primary-text text-md",
       variant === "primary"
-        ? "bg-accent hover:bg-accent-hover outline-accent-hover"
-        : "bg-secondary-bg hover:bg-hover outline-hover",
-      isLoading ? "opacity-50 disabled:pointer-events-none" : "cursor-pointer"
+        ? "bg-accent hover:bg-accent-offset outline-accent-offset"
+        : "bg-secondary-bg hover:bg-secondary-bg-offset outline-secondary-bg-offset",
+      isLoading ? "opacity-50 disabled:pointer-events-none" : "cursor-pointer",
     )}
     disabled={isLoading}
     {...props}
@@ -30,7 +33,7 @@ export const Button: React.FC<ButtonProps> = ({
 const ButtonSpinner = () => (
   <span className="flex items-center justify-center">
     <svg
-      className="animate-spin h-5 w-5 text-primary-text"
+      className="w-5 h-5 animate-spin text-primary-text"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
@@ -43,3 +46,38 @@ const ButtonSpinner = () => (
     </svg>
   </span>
 );
+
+type BadgeButtonProps = {
+  variant: ButtonVariant;
+  size: "small" | "large";
+  text: string;
+  onClick: () => void;
+};
+
+export const BadgeButton: React.FC<BadgeButtonProps> = ({
+  variant,
+  size,
+  text: initialText,
+  onClick,
+}) => {
+  const { onClickWithTextUpdate, buttonText } = useButtonTextUpdateOnClick({
+    callback: onClick,
+    initialText,
+    postClickText: "Copied!",
+  });
+
+  return (
+    <span
+      className={classNames(
+        "inline-flex items-center px-3 rounded-md cursor-pointer text-primary-text",
+        size === "large" ? "py-2 text-sm" : " py-1 text-xs",
+        variant === "primary"
+          ? "bg-accent hover:bg-accent-offset"
+          : "bg-secondary-bg hover:bg-primary-bg",
+      )}
+      onClick={onClickWithTextUpdate}
+    >
+      {buttonText}
+    </span>
+  );
+};

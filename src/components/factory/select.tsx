@@ -25,7 +25,7 @@ const Select = <T extends ISelectItem>({
         <ChevronDownIcon />
       </SelectFct.Icon>
     </SelectFct.Trigger>
-    <SelectFct.Content className="overflow-hidden rounded-md bg-secondary-bg ring ring-hover">
+    <SelectFct.Content className="overflow-hidden rounded-md bg-secondary-bg ring ring-secondary-bg-offset">
       <SelectFct.Viewport className="p-[7px]">
         <SelectFct.Group>
           {Object.entries(items).map(([value, text]) => (
@@ -46,7 +46,7 @@ const SelectItem: React.FC<SelectItemProps> = ({ value, text }) => (
   <SelectFct.Item
     value={value}
     className={
-      "relative flex h-[25px] select-none items-center rounded p-4 text-md text-primary-text leading-none data-[highlighted]:bg-hover data-[highlighted]:outline-none cursor-pointer"
+      "relative flex h-[25px] select-none items-center rounded p-4 text-md text-primary-text leading-none data-[highlighted]:bg-secondary-bg-offset data-[highlighted]:outline-none cursor-pointer"
     }
   >
     <SelectFct.ItemText>{text}</SelectFct.ItemText>

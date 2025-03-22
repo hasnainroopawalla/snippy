@@ -1,7 +1,7 @@
 import * as React from "react";
 import type { ISnippet } from "../../types";
 import { FileTextIcon } from "@radix-ui/react-icons";
-import { TextWithIcon } from "../factory";
+import { BadgeButton, TextWithIcon } from "../factory";
 
 type ContentViewerProps = {
   content: ISnippet["content"];
@@ -22,15 +22,18 @@ export const ContentViewer: React.FC<ContentViewerProps> = ({ content }) => (
 const ContentViewerHeader: React.FC = () => (
   <div
     id="content-viewer-header"
-    className="flex items-center justify-between px-3 py-2 bg-secondary-offset rounded-t-md"
+    className="flex flex-row flex-wrap items-center justify-between gap-2 px-3 py-2 bg-secondary-bg-offset rounded-t-md"
   >
     <TextWithIcon
       TextSlot={<span className="font-mono text-md">big-blue-lion</span>}
       IconSlot={<FileTextIcon />}
       classNameOverrides="text-secondary-text"
     />
-    <span className="inline-flex items-center px-3 py-1 text-xs rounded-md cursor-pointer bg-secondary-bg hover:bg-primary-bg text-primary-text">
-      Copy URL
-    </span>
+    <BadgeButton
+      variant="secondary"
+      size="small"
+      text="Copy URL"
+      onClick={() => console.log("Copy URL")}
+    />
   </div>
 );
