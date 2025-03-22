@@ -9,7 +9,7 @@ export const SnippetViewer: React.FC<SnippetViewerProps> = ({ snippet }) => (
   <div className="flex flex-col gap-8">
     <ViewerToolbar />
     <div className="flex flex-col gap-3">
-      <ContentViewer content={snippet.content} />
+      <ContentViewer slug={snippet.slug} content={snippet.content} />
       <SnippetMetadata />
     </div>
   </div>

@@ -1,4 +1,6 @@
 import * as React from "react";
+import { Textarea, TextWithIcon } from "../factory";
+import { Pencil2Icon } from "@radix-ui/react-icons";
 
 type ContentEditorProps = {
   contentEditorRef: React.RefObject<HTMLTextAreaElement>;
@@ -7,12 +9,16 @@ type ContentEditorProps = {
 export const ContentEditor: React.FC<ContentEditorProps> = ({
   contentEditorRef,
 }) => (
-  <div className="flex flex-col gap-2">
-    <span className="text-secondary-text">Content</span>
-    <textarea
-      ref={contentEditorRef}
-      placeholder="Paste or type here.."
-      className="w-full h-[150px] p-2 tracking-wide rounded bg-secondary-bg text-primary-text focus:outline-accent focus:outline-1"
-    />
-  </div>
+  <Textarea
+    textareaRef={contentEditorRef}
+    id="content-editor-textarea"
+    placeholder="Paste or type here.."
+    HeaderTitleSlot={
+      <TextWithIcon
+        TextSlot={<span className="font-mono text-md">Content</span>}
+        IconSlot={<Pencil2Icon />}
+        classNameOverrides="text-secondary-text"
+      />
+    }
+  />
 );
