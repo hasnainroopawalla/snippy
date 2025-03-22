@@ -22,3 +22,17 @@ export const TextWithIcon: React.FC<TextWithIconProps> = ({
     {TextSlot}
   </div>
 );
+
+type TextAnchorProps = {
+  label: string;
+  onClick: () => void;
+};
+
+export const TextAnchor: React.FC<TextAnchorProps> = ({ label, onClick }) => (
+  <span
+    className="cursor-pointer text-accent hover:underline"
+    onClick={onClick}
+  >
+    {label}
+  </span>
+);
