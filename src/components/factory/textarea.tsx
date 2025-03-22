@@ -3,7 +3,7 @@ import * as React from "react";
 type TextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
   HeaderTitleSlot?: React.ReactElement;
   HeaderButtonSlot?: React.ReactElement;
-  textareaRef?: React.LegacyRef<HTMLTextAreaElement>;
+  textareaRef?: React.RefObject<HTMLTextAreaElement>;
 };
 
 export const Textarea: React.FC<TextareaProps> = ({
