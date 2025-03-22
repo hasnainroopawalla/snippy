@@ -1,13 +1,13 @@
 import * as React from "react";
 import type { ISnippet } from "../../types";
-import { ViewerSettingsPanel } from "./viewer-settings-panel";
+import { ViewerToolbar } from "./viewer-toolbar";
 import { ContentViewer } from "./content-viewer";
 
 type SnippetViewerProps = { snippet: ISnippet };
 
 export const SnippetViewer: React.FC<SnippetViewerProps> = ({ snippet }) => (
   <div className="flex flex-col gap-6">
-    <ViewerSettingsPanel />
+    <ViewerToolbar />
     <div className="flex flex-col gap-3">
       <ContentViewer content={snippet.content} />
       <SnippetMetadata />

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SelectWithLabel } from "../factory";
+import { SelectWithLabel, TextWithIcon } from "../factory";
 import {
   SnippetValidity,
   SNIPPET_VALIDITY,
@@ -12,11 +12,11 @@ import {
   addMinutesToDate,
 } from "../../utils";
 
-type ComposerSettingsPanelProps = {
+type ComposerToolbarProps = {
   validityRef: React.MutableRefObject<SnippetValidity>;
 };
 
-export const ComposerSettingsPanel: React.FC<ComposerSettingsPanelProps> = ({
+export const ComposerToolbar: React.FC<ComposerToolbarProps> = ({
   validityRef,
 }) => {
   const [validity, setValidity] = React.useState(validityRef.current);
@@ -62,9 +62,10 @@ const MinuteChange: React.FC<MinuteChangeProps> = ({ validity }) => {
   );
 
   return (
-    <div className="text-secondary-text text-xs flex flex-row gap-1 items-center">
-      <CountdownTimerIcon />
-      <span>Expires on {expiresOn}</span>
-    </div>
+    <TextWithIcon
+      TextSlot={<span>Expires on {expiresOn}</span>}
+      IconSlot={<CountdownTimerIcon />}
+      classNameOverrides="text-xs text-secondary-text"
+    />
   );
 };

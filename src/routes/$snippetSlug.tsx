@@ -25,6 +25,4 @@ export const Route = createFileRoute("/$snippetSlug")({
   },
 
   pendingComponent: () => <span>Loading</span>,
-
-  notFoundComponent: () => <span>Not found!</span>,
 });

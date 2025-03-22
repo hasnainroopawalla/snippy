@@ -11,12 +11,16 @@
   /* dark mode */
   --color-primary-bg: #18191a;
   --color-secondary-bg: #242526;
+  --color-secondary-offset: #303132;
   --color-hover: #3a3b3c;
   --color-primary-text: #e4e6eb;
   --color-secondary-text: #b0b3b8;
   --color-accent: #4338ca;
   --color-accent-hover: #362c9e;
   --color-error: #d64545;
+  --color-anchor: #6a5acd;
+  /* --color-badge-bg: #121314;
+  --color-badge-hover: #4338ca; */
 }
 
 /* body {

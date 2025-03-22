@@ -2,9 +2,9 @@ import * as React from "react";
 import { SnippetValidity } from "../../types";
 import { ButtonsPanel } from "./buttons-panel";
 import { ContentEditor } from "./content-editor";
-import { ComposerSettingsPanel } from "./composer-settings-panel";
 import { isNewSnippetDataValid, useCreateSnippet } from "./use-create-snippet";
 import { useNavigate } from "@tanstack/react-router";
+import { ComposerToolbar } from "./composer-toolbar";
 
 export const SnippetComposer: React.FC = () => {
   const validityRef = React.useRef<SnippetValidity>("1h");
@@ -43,7 +43,7 @@ export const SnippetComposer: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      <ComposerSettingsPanel validityRef={validityRef} />
+      <ComposerToolbar validityRef={validityRef} />
       <ContentEditor contentEditorRef={contentEditorRef} />
       <ButtonsPanel
         onSubmit={onSubmit}
