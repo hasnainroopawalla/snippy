@@ -12,7 +12,7 @@ export const SnippetComposer: React.FC = () => {
   const contentEditorRef = React.useRef<HTMLTextAreaElement>(null);
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-8">
       <ComposerToolbar
         validityRef={validityRef}
         privacyRef={privacyRef}

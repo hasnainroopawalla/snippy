@@ -62,22 +62,20 @@ export const ComposerToolbar: React.FC<ComposerToolbarProps> = ({
         <SelectWithLabel
           label="Privacy"
           items={SNIPPET_PRIVACY_OPTIONS}
-          selectClassNameOverrides={"w-[100px]"}
+          selectClassNameOverrides={"w-[120px]"}
           onItemSelect={onSelectPrivacy}
           initialValue={privacy}
         />
-        <InputWithLabel
-          inputRef={passwordRef}
-          onChange={onChangePassword}
-          label="Password"
-          type="password"
-        />
+        {privacy !== "public" && (
+          <InputWithLabel
+            inputRef={passwordRef}
+            onChange={onChangePassword}
+            label="Password"
+            type="password"
+          />
+        )}
       </div>
-      <SnippetInfoPanel
-        validity={validity}
-        privacy={privacy}
-        password={password}
-      />
+      <SnippetInfoPanel validity={validity} privacy={privacy} />
     </div>
   );
 };

@@ -14,6 +14,7 @@ export type SnippetValidity = keyof typeof SNIPPET_VALIDITY_OPTIONS;
 
 export const SNIPPET_PRIVACY_OPTIONS = {
   public: "Public",
+  protected: "Protected",
   private: "Private",
 };
 

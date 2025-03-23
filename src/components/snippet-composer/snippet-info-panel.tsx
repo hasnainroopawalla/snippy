@@ -4,7 +4,7 @@ import {
   EyeNoneIcon,
   EyeOpenIcon,
   LockClosedIcon,
-  LockOpen1Icon,
+  LockOpen2Icon,
 } from "@radix-ui/react-icons";
 import { BadgeWithIcon } from "../factory";
 import {
@@ -21,15 +21,18 @@ import {
 type SnippetInfoPanelProps = {
   validity: SnippetValidity;
   privacy: SnippetPrivacy;
-  password: string;
 };
 
 export const SnippetInfoPanel: React.FC<SnippetInfoPanelProps> = ({
   validity,
   privacy,
-  password,
 }) => {
-  const { privacyBadge, passwordBadge } = getBadgeText(privacy, password);
+  const {
+    privacyBadgeText,
+    privacyBadgeIcon,
+    passwordBadgeText,
+    passwordBadgeIcon,
+  } = getBadgeText(privacy);
 
   return (
     <div className="flex flex-row flex-wrap gap-2">
@@ -37,22 +40,22 @@ export const SnippetInfoPanel: React.FC<SnippetInfoPanelProps> = ({
       <BadgeWithIcon
         color="green"
         text={privacyBadgeText}
-        IconSlot={<EyeNoneIcon />}
+        IconSlot={privacyBadgeIcon}
       />
       <BadgeWithIcon
         color="orange"
         text={passwordBadgeText}
-        IconSlot={<LockClosedIcon />}
+        IconSlot={passwordBadgeIcon}
       />
     </div>
   );
 };
 
-type ExpirationInfoBannerProps = {
+type LiveValidityInfoBadgeProps = {
   validity: SnippetValidity;
 };
 
-const LiveValidityInfoBadge: React.FC<ExpirationInfoBannerProps> = ({
+const LiveValidityInfoBadge: React.FC<LiveValidityInfoBadgeProps> = ({
   validity,
 }) => {
   const renderToken = useMinuteTick();
@@ -75,57 +78,30 @@ const LiveValidityInfoBadge: React.FC<ExpirationInfoBannerProps> = ({
   );
 };
 
-const getBadgeText = (
-  privacy: SnippetPrivacy,
-  password: string,
-): {
-  privacyBadgeText: string;
-  privacyBadgeIcon: React.ReactElement;
-  passwordBadgeText: string;
-  passwordBadgeIcon: React.ReactElement;
-} => {
-  const privacyBadgeProps =
-    privacy === "public"
-      ? {
-          privacyBadgeText: "Everyone",
-          privacyBadgeIcon: <EyeOpenIcon />,
-        }
-      : {
-          privacyBadgeText: "No one.",
-          privacyBadgeIcon: <EyeNoneIcon />,
-        };
+const getBadgeText = (privacy: SnippetPrivacy) => {
+  switch (privacy) {
+    case "public":
+      return {
+        privacyBadgeText: "Everyone",
+        privacyBadgeIcon: <EyeOpenIcon />,
+        passwordBadgeText: "Readonly",
+        passwordBadgeIcon: <LockOpen2Icon />,
+      };
 
-  if (privacy === "public") {
-    // Public with password - require password for edit.
-    if (password) {
+    case "protected":
       return {
-        ...privacyBadgeProps,
-        passwordBadgeText: "Password required only to edit",
+        privacyBadgeText: "Everyone",
+        privacyBadgeIcon: <EyeOpenIcon />,
+        passwordBadgeText: "Password required to edit",
         passwordBadgeIcon: <LockClosedIcon />,
       };
-    } else {
-      // Public without password - readonly.
+
+    case "private":
       return {
-        ...privacyBadgeProps,
-        passwordBadgeText: "No password required",
-        passwordBadgeIcon: <LockOpen1Icon />,
-      };
-    }
-  } else if (privacy === "private") {
-    // Public with password - require password for edit.
-    if (password) {
-      return {
-        ...privacyBadgeProps,
-        passwordBadgeText: "Password required only to edit",
+        privacyBadgeText: "No one",
+        privacyBadgeIcon: <EyeNoneIcon />,
+        passwordBadgeText: "Password required to view and edit",
         passwordBadgeIcon: <LockClosedIcon />,
       };
-    } else {
-      // Public without password - cannot be edited.
-      return {
-        ...privacyBadgeProps,
-        passwordBadgeText: "No password required",
-        passwordBadgeIcon: <LockOpen1Icon />,
-      };
-    }
   }
 };
