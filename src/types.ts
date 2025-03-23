@@ -20,23 +20,37 @@ export const SNIPPET_PRIVACY_OPTIONS = {
 
 export type SnippetPrivacy = keyof typeof SNIPPET_PRIVACY_OPTIONS;
 
+/**
+ * Represents a Snippet in the DB.
+ */
 export type ISnippet = {
   /* The unique integer identifier of the Snippet in the DB */
   id: string;
   /* The unique, human readable identifier of the Snippet */
   slug: string;
-  // /* The validity of the Snippet after which it is deleted from the DB */
+  /* The validity of the Snippet after which it is deleted from the DB */
   // validity: string;
   /* The raw string content of the Snippet */
   content: string;
   /* The timestamp of when the Snippet was created */
   createdAt: string;
+  /* The hashed password string */
+  passwordHash: string | null | undefined;
 };
 
 /**
- * The required props for creating a new Snippet.
+ * The required props from the UX layer for creating a new Snippet.
  */
 export type ICreateSnippetFormData = {
   content: ISnippet["content"];
-  validity: SnippetValidity;
+  validity: SnippetValidity; // TODO: experiment with ways to store in DB
+  privacy: SnippetPrivacy;
+  password: string;
+};
+
+/**
+ * All the required props for creating a new Snippet.
+ */
+export type ICreateSnippetData = ICreateSnippetFormData & {
+  slug: ISnippet["slug"];
 };

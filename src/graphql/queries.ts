@@ -9,6 +9,8 @@ export const GET_SNIPPET_BY_ID_QUERY = graphql(`
           content
           created_at
           slug
+          password_hash
+          privacy
         }
       }
     }
@@ -24,6 +26,8 @@ export const GET_SNIPPET_BY_SLUG_QUERY = graphql(`
           content
           created_at
           slug
+          password_hash
+          privacy
         }
       }
     }

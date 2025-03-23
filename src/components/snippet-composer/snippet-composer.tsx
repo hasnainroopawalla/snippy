@@ -22,6 +22,8 @@ export const SnippetComposer: React.FC = () => {
       <ButtonsPanel
         contentEditorRef={contentEditorRef}
         validityRef={validityRef}
+        privacyRef={privacyRef}
+        passwordRef={passwordRef}
       />
     </div>
   );

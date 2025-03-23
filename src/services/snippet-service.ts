@@ -5,7 +5,11 @@ import {
   GET_SNIPPET_BY_SLUG_QUERY,
 } from "../graphql";
 import type { ICreateSnippetFormData, ISnippet } from "../types";
-import { MutationResultAdapters, QueryResultAdapters } from "./adapters";
+import {
+  MutationResultAdapters,
+  QueryResultAdapters,
+  VariableAdapters,
+} from "./adapters";
 import type { SlugService } from "./slug-service";
 
 type SnippetServiceProps = {
@@ -26,14 +30,15 @@ export class SnippetService {
     variables: ICreateSnippetFormData,
   ): Promise<ISnippet | null> {
     const slug = this.slugService.generate();
+    const passwordHash = this.encryptionService.encrypt();
 
     return this.apolloClient
       .mutate({
         mutation: CREATE_SNIPPET_MUTATION,
-        variables: {
+        variables: VariableAdapters.createSnippet({
           ...variables,
           slug,
-        },
+        }),
       })
       .then(result => MutationResultAdapters.createSnippet(result));
   }
