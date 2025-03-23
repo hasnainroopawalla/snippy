@@ -54,6 +54,7 @@ type BadgeButtonProps = {
   onClick: () => void;
 };
 
+// TODO: rename
 export const BadgeButton: React.FC<BadgeButtonProps> = ({
   variant,
   size,

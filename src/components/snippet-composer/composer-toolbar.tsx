@@ -1,32 +1,52 @@
 import * as React from "react";
-import { SelectWithLabel, TextWithIcon } from "../factory";
+import { InputWithLabel, SelectWithLabel } from "../factory";
 import {
   SnippetValidity,
-  SNIPPET_VALIDITY,
-  validityToMinutesMap,
+  SNIPPET_VALIDITY_OPTIONS,
+  SNIPPET_PRIVACY_OPTIONS,
+  SnippetPrivacy,
 } from "../../types";
-import { CountdownTimerIcon } from "@radix-ui/react-icons";
-import {
-  useMinuteTick,
-  convertDateToString,
-  addMinutesToDate,
-} from "../../utils";
+import { SnippetInfoPanel } from "./snippet-info-panel";
 
 type ComposerToolbarProps = {
   validityRef: React.MutableRefObject<SnippetValidity>;
+  privacyRef: React.MutableRefObject<SnippetPrivacy>;
+  passwordRef: React.RefObject<HTMLInputElement>;
 };
 
 export const ComposerToolbar: React.FC<ComposerToolbarProps> = ({
   validityRef,
+  privacyRef,
+  passwordRef,
 }) => {
   const [validity, setValidity] = React.useState(validityRef.current);
+  const [privacy, setPrivacy] = React.useState(privacyRef.current);
+  const [password, setPassword] = React.useState(
+    passwordRef.current?.value || "",
+  );
 
-  const onValiditySelected = React.useCallback(
+  const onSelectValidity = React.useCallback(
     (validity: SnippetValidity) => {
-      validityRef.current = validity;
       setValidity(validity);
+      validityRef.current = validity;
     },
     [validityRef],
+  );
+
+  const onSelectPrivacy = React.useCallback(
+    (privacy: SnippetPrivacy) => {
+      setPrivacy(privacy);
+      privacyRef.current = privacy;
+    },
+    [privacyRef],
+  );
+
+  const onChangePassword = React.useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
+      setPassword(value);
+    },
+    [],
   );
 
   return (
@@ -34,39 +54,30 @@ export const ComposerToolbar: React.FC<ComposerToolbarProps> = ({
       <div className="flex flex-row flex-wrap gap-4">
         <SelectWithLabel
           label="Validity"
-          items={SNIPPET_VALIDITY}
-          onItemSelect={onValiditySelected}
-          initialValue={validityRef.current}
+          items={SNIPPET_VALIDITY_OPTIONS}
+          selectClassNameOverrides={"w-[150px]"}
+          onItemSelect={onSelectValidity}
+          initialValue={validity}
+        />
+        <SelectWithLabel
+          label="Privacy"
+          items={SNIPPET_PRIVACY_OPTIONS}
+          selectClassNameOverrides={"w-[100px]"}
+          onItemSelect={onSelectPrivacy}
+          initialValue={privacy}
+        />
+        <InputWithLabel
+          inputRef={passwordRef}
+          onChange={onChangePassword}
+          label="Password"
+          type="password"
         />
       </div>
-      <ExpirationInfoBanner validity={validity} />
+      <SnippetInfoPanel
+        validity={validity}
+        privacy={privacy}
+        password={password}
+      />
     </div>
-  );
-};
-
-type ExpirationInfoBannerProps = {
-  validity: SnippetValidity;
-};
-
-const ExpirationInfoBanner: React.FC<ExpirationInfoBannerProps> = ({
-  validity,
-}) => {
-  const renderToken = useMinuteTick();
-
-  const expiresOn = React.useMemo(
-    () =>
-      convertDateToString(
-        addMinutesToDate(new Date() /* now */, validityToMinutesMap[validity]),
-      ),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [validity, renderToken],
-  );
-
-  return (
-    <TextWithIcon
-      TextSlot={<span>Expires on {expiresOn}</span>}
-      IconSlot={<CountdownTimerIcon />}
-      classNameOverrides="text-xs text-secondary-text"
-    />
   );
 };

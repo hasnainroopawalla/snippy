@@ -18,6 +18,23 @@
   --color-accent-offset: #362c9e;
   --color-error: #d64545;
   --color-anchor: #6a5acd;
+
+  /* badges */
+  --color-badge-orange: #331e0f;
+  --color-badge-orange-text: #ff9a50;
+
+  --color-badge-blue: #0d2849;
+  --color-badge-blue-text: #66b6fb;
+
+  --color-badge-green: #142c23;
+  --color-badge-green-text: #3ac883;
+
+  /* --color-badge-orange:;
+  --color-badge-orange-text:;
+  --color-badge-blue:;
+  --color-badge-blue-text:;
+  --color-badge-green-text:;
+  --color-badge-green-text:; */
   /* --color-badge-bg: #121314;
   --color-badge-hover: #4338ca; */
 }
@@ -28,4 +45,11 @@
 
 body {
   @apply bg-primary-bg;
+}
+
+/* Controls the peek at password (eye) color in <input> elements. */
+@layer utilities {
+  input[type="password"]::-ms-reveal {
+    filter: invert(50%); /* Adjusts the icon's color contrast */
+  }
 }

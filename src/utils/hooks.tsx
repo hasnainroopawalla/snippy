@@ -31,3 +31,15 @@ export const useMinuteTick = () => {
 
   return val;
 };
+
+export const useStateRef = <T,>(initialValue: T) => {
+  const [state, setState] = React.useState<T>(initialValue);
+
+  const ref = React.useRef<T>(initialValue);
+
+  React.useEffect(() => {
+    ref.current = state;
+  }, [state]);
+
+  return [state, setState, ref] as const;
+};

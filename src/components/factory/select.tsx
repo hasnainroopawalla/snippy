@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as SelectFct from "@radix-ui/react-select";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
+import classNames from "classnames";
 
 type ISelectItem = { [key: string]: string };
 
@@ -8,18 +9,25 @@ type SelectProps<T extends ISelectItem> = {
   initialValue: keyof T;
   items: T;
   onItemSelect: (item: keyof T) => void;
+  selectClassNameOverrides?: string;
 };
 
 const Select = <T extends ISelectItem>({
   items,
   onItemSelect,
   initialValue,
+  selectClassNameOverrides,
 }: SelectProps<T>) => (
   <SelectFct.Root
     defaultValue={initialValue.toString()}
     onValueChange={onItemSelect}
   >
-    <SelectFct.Trigger className="w-[150px] h-[45px] flex flex-row justify-between text-md items-center gap-2 rounded bg-secondary-bg px-[15px] text-primary-text cursor-pointer focus:outline-accent focus:outline-1">
+    <SelectFct.Trigger
+      className={classNames(
+        "h-[45px] flex flex-row justify-between text-md items-center gap-2 rounded bg-secondary-bg px-[15px] text-primary-text cursor-pointer focus:outline-accent focus:outline-1",
+        selectClassNameOverrides,
+      )}
+    >
       <SelectFct.Value />
       <SelectFct.Icon className="text-primary-text">
         <ChevronDownIcon />
