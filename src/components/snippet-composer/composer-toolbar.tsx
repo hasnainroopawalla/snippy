@@ -43,8 +43,7 @@ export const ComposerToolbar: React.FC<ComposerToolbarProps> = ({
 
   const onChangePassword = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.value;
-      setPassword(value);
+      setPassword(event.target.value);
     },
     [],
   );

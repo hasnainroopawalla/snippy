@@ -11,6 +11,7 @@ export const Input: React.FC<InputProps> = ({
   ...props
 }) => (
   <input
+    ref={ref}
     className={classNames(
       "h-[45px] w-[150px] flex flex-row justify-between text-md items-center gap-2 rounded bg-secondary-bg px-[15px] text-primary-text focus:outline-accent focus:outline-1",
     )}

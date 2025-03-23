@@ -8,7 +8,6 @@ export const SnippetComposer: React.FC = () => {
   const validityRef = React.useRef<SnippetValidity>("10m");
   const privacyRef = React.useRef<SnippetPrivacy>("public");
   const passwordRef = React.useRef<HTMLInputElement>(null);
-
   const contentEditorRef = React.useRef<HTMLTextAreaElement>(null);
 
   return (

@@ -10,6 +10,8 @@ type SnippetViewerProps = { snippet: ISnippet };
 export const SnippetViewer: React.FC<SnippetViewerProps> = ({ snippet }) => {
   const contentViewerRef = React.useRef<HTMLTextAreaElement>(null);
 
+  console.log(snippet);
+
   return (
     <div className="flex flex-col gap-8">
       <ViewerToolbar contentViewerRef={contentViewerRef} />

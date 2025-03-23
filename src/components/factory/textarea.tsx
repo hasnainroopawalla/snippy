@@ -18,7 +18,7 @@ export const Textarea: React.FC<TextareaProps> = ({
     <TextareaHeader TitleSlot={HeaderTitleSlot} ButtonSlot={HeaderButtonSlot} />
     <textarea
       readOnly={readOnly}
-      className="w-full h-[150px] p-3 tracking-wide rounded-b-md field-sizing-content bg-secondary-bg text-primary-text focus:outline-none"
+      className="w-full h-[200px] p-3 tracking-wide rounded-b-md field-sizing-content bg-secondary-bg text-primary-text focus:outline-none"
       ref={textareaRef}
       {...props}
     />

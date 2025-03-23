@@ -33,7 +33,6 @@ export const ButtonsPanel: React.FC<ButtonsPanelProps> = ({
     };
 
     if (!isValidCreateSnippetData(snippetData)) {
-      console.log("INVALID", snippetData);
       contentEditorRef.current?.focus();
       return;
     }

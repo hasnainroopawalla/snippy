@@ -11,34 +11,42 @@ import {
   VariableAdapters,
 } from "./adapters";
 import type { SlugService } from "./slug-service";
+import { CryptoService } from "./crypto-service";
 
 type SnippetServiceProps = {
   apolloClient: ApolloClient<NormalizedCacheObject>;
   slugService: SlugService;
+  cryptoService: CryptoService;
 };
 
 export class SnippetService {
   private apolloClient: ApolloClient<NormalizedCacheObject>;
   private slugService: SlugService;
+  private cryptoService: CryptoService;
 
   constructor(props: SnippetServiceProps) {
     this.apolloClient = props.apolloClient;
     this.slugService = props.slugService;
+    this.cryptoService = props.cryptoService;
   }
 
   public async createSnippet(
     variables: ICreateSnippetFormData,
   ): Promise<ISnippet | null> {
     const slug = this.slugService.generate();
-    // const passwordHash = this.encryptionService.encrypt();
 
     return this.apolloClient
       .mutate({
         mutation: CREATE_SNIPPET_MUTATION,
-        variables: VariableAdapters.createSnippet({
-          ...variables,
+        variables: {
           slug,
-        }),
+          content: variables.content,
+          privacy: VariableAdapters.snippetPrivacy(variables.privacy),
+          validity: variables.validity,
+          passwordHash: variables.password
+            ? this.cryptoService.hash(variables.password)
+            : "",
+        },
       })
       .then(result => MutationResultAdapters.createSnippet(result));
   }

@@ -1,11 +1,10 @@
 import { ApolloQueryResult, FetchResult } from "@apollo/client";
 import {
   CreateSnippetMutation,
-  CreateSnippetMutationVariables,
   GetSnippetByIdQuery,
   Privacy,
 } from "../graphql/generated/graphql";
-import type { ICreateSnippetData, ISnippet, SnippetPrivacy } from "../types";
+import type { ISnippet, SnippetPrivacy } from "../types";
 
 export const QueryResultAdapters = {
   /**
@@ -64,13 +63,6 @@ export const MutationResultAdapters = {
 };
 
 export const VariableAdapters = {
-  createSnippet: (
-    variables: ICreateSnippetData,
-  ): CreateSnippetMutationVariables => ({
-    ...variables,
-    privacy: VariableAdapters.snippetPrivacy(variables.privacy),
-  }),
-
   snippetPrivacy: (privacy: SnippetPrivacy): Privacy => {
     switch (privacy) {
       case "private":
