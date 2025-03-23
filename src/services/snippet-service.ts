@@ -30,7 +30,7 @@ export class SnippetService {
     variables: ICreateSnippetFormData,
   ): Promise<ISnippet | null> {
     const slug = this.slugService.generate();
-    const passwordHash = this.encryptionService.encrypt();
+    // const passwordHash = this.encryptionService.encrypt();
 
     return this.apolloClient
       .mutate({

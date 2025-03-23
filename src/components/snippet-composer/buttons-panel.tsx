@@ -1,12 +1,11 @@
 import * as React from "react";
 import { Button } from "../factory";
-import { isNewSnippetDataValid, useCreateSnippet } from "./use-create-snippet";
+import {
+  isValidCreateSnippetData,
+  useCreateSnippet,
+} from "./use-create-snippet";
 import { useNavigate } from "@tanstack/react-router";
-import type {
-  ICreateSnippetFormData,
-  SnippetPrivacy,
-  SnippetValidity,
-} from "../../types";
+import type { SnippetPrivacy, SnippetValidity } from "../../types";
 
 type ButtonsPanelProps = {
   contentEditorRef: React.RefObject<HTMLTextAreaElement>;
@@ -26,14 +25,15 @@ export const ButtonsPanel: React.FC<ButtonsPanelProps> = ({
   const navigate = useNavigate();
 
   const onSubmit = React.useCallback(() => {
-    const snippetData: ICreateSnippetFormData = {
-      content: contentEditorRef.current?.value || "",
+    const snippetData = {
+      content: contentEditorRef.current?.value,
       validity: validityRef.current,
       privacy: privacyRef.current,
-      password: passwordRef.current?.value || "",
+      password: passwordRef.current?.value,
     };
 
-    if (!isNewSnippetDataValid(snippetData)) {
+    if (!isValidCreateSnippetData(snippetData)) {
+      console.log("INVALID", snippetData);
       contentEditorRef.current?.focus();
       return;
     }

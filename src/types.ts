@@ -44,9 +44,20 @@ export type ISnippet = {
 export type ICreateSnippetFormData = {
   content: ISnippet["content"];
   validity: SnippetValidity; // TODO: experiment with ways to store in DB
-  privacy: SnippetPrivacy;
-  password: string;
-};
+} & (
+  | {
+      privacy: Extract<SnippetPrivacy, "public">;
+      password: string | null | undefined;
+    }
+  | {
+      privacy: Extract<SnippetPrivacy, "protected">;
+      password: string;
+    }
+  | {
+      privacy: Extract<SnippetPrivacy, "private">;
+      password: string;
+    }
+);
 
 /**
  * All the required props for creating a new Snippet.
