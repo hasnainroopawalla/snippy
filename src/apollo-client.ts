@@ -6,6 +6,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { relayStylePagination } from "@apollo/client/utilities";
+import type { AuthService } from "./services";
 
 const cache = new InMemoryCache({
   dataIdFromObject(responseObject) {
@@ -34,21 +35,33 @@ const cache = new InMemoryCache({
   },
 });
 
-const httpLink = createHttpLink({
-  uri: import.meta.env.VITE_SUPABASE_URL,
-});
+export const createApolloClient = (props: { authService: AuthService }) => {
+  const { authService } = props;
 
-const authLink = setContext((_, { headers }) => ({
-  headers: {
-    ...headers,
-    apiKey: import.meta.env.VITE_SUPABASE_API_KEY,
-    // Authorization: token ? `Bearer ${token}` : "",
-  },
-}));
+  const httpLink = createHttpLink({
+    uri: import.meta.env.VITE_SUPABASE_DATA_URL,
+  });
 
-const apolloClient = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache,
-});
+  const authLink = setContext(async (_, { headers }) => {
+    const session = await authService.getSession();
 
-export default apolloClient;
+    if (!session) {
+      throw new Error("Auth session not created.");
+    }
+
+    const token = session.access_token;
+
+    return {
+      headers: {
+        ...headers,
+        Authorization: token ? `Bearer ${token}` : "",
+        apiKey: import.meta.env.VITE_SUPABASE_API_KEY,
+      },
+    };
+  });
+
+  return new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache,
+  });
+};

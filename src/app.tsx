@@ -3,6 +3,7 @@ import { ServicesProvider, useServices } from "./contexts";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 import { IRootRouterWithContext } from "./routes/__root";
+import type { ICore } from "./core";
 
 const router = createRouter({
   routeTree,
@@ -22,8 +23,8 @@ const App: React.FC = () => {
   return <RouterProvider router={router} context={{ services }} />;
 };
 
-export const ContextualApp: React.FC = () => (
-  <ServicesProvider>
+export const ContextualApp: React.FC<{ core: ICore }> = ({ core }) => (
+  <ServicesProvider services={core.services}>
     <App />
   </ServicesProvider>
 );

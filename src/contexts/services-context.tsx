@@ -1,6 +1,5 @@
 import * as React from "react";
-import { SnippetService, SlugService, CryptoService } from "../services";
-import apolloClient from "../apollo-client";
+import { SnippetService } from "../services";
 
 export type IServicesContext = {
   snippetService: SnippetService;
@@ -10,26 +9,17 @@ const ServicesContext = React.createContext<IServicesContext>(
   {} as IServicesContext,
 );
 
-export const ServicesProvider = ({ children }: React.PropsWithChildren) => {
-  const services = React.useMemo(() => {
-    const slugService = new SlugService();
-
-    const cryptoService = new CryptoService();
-
-    return {
-      snippetService: new SnippetService({
-        apolloClient,
-        slugService,
-        cryptoService,
-      }),
-    };
-  }, []);
-
-  return (
-    <ServicesContext.Provider value={services}>
-      {children}
-    </ServicesContext.Provider>
-  );
+type IServicesProviderProps = {
+  services: IServicesContext;
 };
+
+export const ServicesProvider = ({
+  services,
+  children,
+}: React.PropsWithChildren<IServicesProviderProps>) => (
+  <ServicesContext.Provider value={services}>
+    {children}
+  </ServicesContext.Provider>
+);
 
 export const useServices = () => React.useContext(ServicesContext);

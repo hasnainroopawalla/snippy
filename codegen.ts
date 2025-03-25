@@ -1,12 +1,12 @@
 import type { CodegenConfig } from "@graphql-codegen/cli";
 import { addTypenameSelectionDocumentTransform } from "@graphql-codegen/client-preset";
 
-console.log(`Generating from URL: ${process.env.VITE_SUPABASE_URL}`);
+console.log(`Generating from URL: ${process.env.VITE_SUPABASE_DATA_URL}`);
 
 const config: CodegenConfig = {
   schema: [
     {
-      [process.env.VITE_SUPABASE_URL as string]: {
+      [process.env.VITE_SUPABASE_DATA_URL as string]: {
         headers: {
           apiKey: process.env.VITE_SUPABASE_API_KEY as string,
         },
