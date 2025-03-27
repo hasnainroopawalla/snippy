@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { SnippetViewer, SnippetNotFound } from "../components";
+import { ViewSnippetScreen, SnippetNotFound } from "../components";
 
 const SnippetPage: React.FC = () => {
   const { snippetSlug } = Route.useParams();
@@ -8,7 +8,9 @@ const SnippetPage: React.FC = () => {
   const { snippet } = Route.useLoaderData();
 
   return (
-    <>{snippet ? <SnippetViewer snippet={snippet} /> : <SnippetNotFound />}</>
+    <>
+      {snippet ? <ViewSnippetScreen snippet={snippet} /> : <SnippetNotFound />}
+    </>
   );
 };
 

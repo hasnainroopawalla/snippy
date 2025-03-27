@@ -4,7 +4,7 @@ import { ButtonsPanel } from "./buttons-panel";
 import { ContentEditor } from "./content-editor";
 import { ComposerToolbar } from "./composer-toolbar";
 
-export const SnippetComposer: React.FC = () => {
+export const ComposeSnippetScreen: React.FC = () => {
   const validityRef = React.useRef<SnippetValidity>("10m");
   const privacyRef = React.useRef<SnippetPrivacy>("public");
   const passwordRef = React.useRef<HTMLInputElement>(null);

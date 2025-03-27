@@ -33,7 +33,7 @@ export const ContentViewer: React.FC<ContentViewerProps> = ({
         <TextWithIcon
           TextSlot={<span className="font-mono text-md">{slug}</span>}
           IconSlot={<FileTextIcon />}
-          classNameOverrides="text-secondary-text"
+          classNameOverrides="text-primary-text"
         />
       }
       HeaderButtonSlot={

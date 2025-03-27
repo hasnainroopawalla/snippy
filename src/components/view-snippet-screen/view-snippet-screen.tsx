@@ -5,9 +5,11 @@ import { ContentViewer } from "./content-viewer";
 import { TextWithIcon } from "../factory";
 import { CountdownTimerIcon } from "@radix-ui/react-icons";
 
-type SnippetViewerProps = { snippet: ISnippet };
+type ViewSnippetScreenProps = { snippet: ISnippet };
 
-export const SnippetViewer: React.FC<SnippetViewerProps> = ({ snippet }) => {
+export const ViewSnippetScreen: React.FC<ViewSnippetScreenProps> = ({
+  snippet,
+}) => {
   const contentViewerRef = React.useRef<HTMLTextAreaElement>(null);
 
   console.log(snippet);

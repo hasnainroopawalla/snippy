@@ -3,7 +3,7 @@ import {
   CreateSnippetMutation,
   GetSnippetByIdQuery,
   Privacy,
-} from "../graphql/generated/graphql";
+} from "../graphql/generated";
 import type { ISnippet, SnippetPrivacy } from "../types";
 
 export const QueryResultAdapters = {
