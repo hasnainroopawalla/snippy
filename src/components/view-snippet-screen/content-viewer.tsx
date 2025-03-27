@@ -2,7 +2,7 @@ import * as React from "react";
 import type { ISnippet } from "../../types";
 import { FileTextIcon } from "@radix-ui/react-icons";
 import {
-  BadgeButtonWithAutoTextUpdate,
+  BadgeButtonWithTextUpdateOnClick,
   Textarea,
   TextWithIcon,
 } from "../factory";
@@ -37,7 +37,7 @@ export const ContentViewer: React.FC<ContentViewerProps> = ({
         />
       }
       HeaderButtonSlot={
-        <BadgeButtonWithAutoTextUpdate
+        <BadgeButtonWithTextUpdateOnClick
           variant="secondary"
           size="small"
           text="Copy URL"

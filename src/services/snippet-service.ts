@@ -80,4 +80,11 @@ export class SnippetService {
   }
 
   public deleteSnippet() {}
+
+  public validatePasswordHash(
+    snippetPasswordHash: string,
+    inputPasswordHash: string,
+  ): boolean {
+    return snippetPasswordHash === this.cryptoService.hash(inputPasswordHash);
+  }
 }

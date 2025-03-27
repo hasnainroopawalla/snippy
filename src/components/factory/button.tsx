@@ -75,12 +75,12 @@ export const BadgeButton: React.FC<BadgeButtonProps> = ({
   </span>
 );
 
-type BadgeButtonWithAutoTextUpdateProps = BadgeButtonProps & {
+type BadgeButtonWithTextUpdateOnClickProps = BadgeButtonProps & {
   postClickText: string;
 };
 
-export const BadgeButtonWithAutoTextUpdate: React.FC<
-  BadgeButtonWithAutoTextUpdateProps
+export const BadgeButtonWithTextUpdateOnClick: React.FC<
+  BadgeButtonWithTextUpdateOnClickProps
 > = ({ postClickText, onClick, text: initialText, ...props }) => {
   const { onClickWithTextUpdate, buttonText } = useButtonTextUpdateOnClick({
     callback: onClick,

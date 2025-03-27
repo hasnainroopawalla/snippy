@@ -3,10 +3,12 @@ import classNames from "classnames";
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   inputRef?: React.RefObject<HTMLInputElement>;
+  classNameOverrides?: string;
 };
 
 export const Input: React.FC<InputProps> = ({
   inputRef: ref,
+  classNameOverrides,
   children,
   ...props
 }) => (
@@ -14,6 +16,7 @@ export const Input: React.FC<InputProps> = ({
     ref={ref}
     className={classNames(
       "h-[45px] w-[150px] flex flex-row justify-between text-md items-center gap-2 rounded bg-secondary-bg px-[15px] text-primary-text focus:outline-accent focus:outline-1",
+      classNameOverrides,
     )}
     {...props}
   />

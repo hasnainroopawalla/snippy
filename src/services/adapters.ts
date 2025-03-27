@@ -28,6 +28,7 @@ export const QueryResultAdapters = {
       content: snippetData.content,
       id: snippetData.id,
       createdAt: snippetData.created_at,
+      privacy: snippetData.privacy,
       // validity: snippetData.validity,
       slug: snippetData.slug,
       passwordHash: snippetData.password_hash,
@@ -39,7 +40,9 @@ export const MutationResultAdapters = {
   /**
    * Adapts the apollo create snippet mutation result to an ISnippet.
    */
-  createSnippet: (result: FetchResult<CreateSnippetMutation>) => {
+  createSnippet: (
+    result: FetchResult<CreateSnippetMutation>,
+  ): ISnippet | null => {
     // result.data?.insertIntosnippetsCollection?.records[0].content
     if (
       !result.data ||
@@ -55,6 +58,7 @@ export const MutationResultAdapters = {
       content: snippetData.content,
       id: snippetData.id,
       createdAt: snippetData.created_at,
+      privacy: snippetData.privacy,
       // validity: snippetData.validity,
       slug: snippetData.slug,
       passwordHash: snippetData.password_hash,

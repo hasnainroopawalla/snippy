@@ -16,6 +16,7 @@ const SnippetPage: React.FC = () => {
 
 export const Route = createFileRoute("/$snippetSlug")({
   component: SnippetPage,
+
   loader: async ({ params, context }) => {
     const {
       services: { snippetService },

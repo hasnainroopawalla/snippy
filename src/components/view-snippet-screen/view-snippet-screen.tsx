@@ -2,17 +2,44 @@ import * as React from "react";
 import type { ISnippet } from "../../types";
 import { ViewerToolbar } from "./viewer-toolbar";
 import { ContentViewer } from "./content-viewer";
-import { TextWithIcon } from "../factory";
-import { CountdownTimerIcon } from "@radix-ui/react-icons";
+import { SnippetMetadata } from "./snippet-metadata";
+import { SnippetPasswordSection } from "./password-section";
+import { isBlockedByPassword } from "./utils";
 
 type ViewSnippetScreenProps = { snippet: ISnippet };
 
 export const ViewSnippetScreen: React.FC<ViewSnippetScreenProps> = ({
   snippet,
 }) => {
-  const contentViewerRef = React.useRef<HTMLTextAreaElement>(null);
+  const [passwordRequired, setPasswordRequired] = React.useState<boolean>(() =>
+    isBlockedByPassword(snippet),
+  );
 
-  console.log(snippet);
+  const onPasswordValidationSuccess = React.useCallback(
+    () => setPasswordRequired(false),
+    [],
+  );
+
+  return (
+    <>
+      {passwordRequired ? (
+        <SnippetPasswordSection
+          snippet={snippet}
+          onPasswordValidationSuccess={onPasswordValidationSuccess}
+        />
+      ) : (
+        <SnippetSection snippet={snippet} />
+      )}
+    </>
+  );
+};
+
+type SnippetSectionProps = {
+  snippet: ISnippet;
+};
+
+const SnippetSection: React.FC<SnippetSectionProps> = ({ snippet }) => {
+  const contentViewerRef = React.useRef<HTMLTextAreaElement>(null);
 
   return (
     <div className="flex flex-col gap-8">
@@ -28,12 +55,3 @@ export const ViewSnippetScreen: React.FC<ViewSnippetScreenProps> = ({
     </div>
   );
 };
-
-// TODO
-const SnippetMetadata: React.FC = () => (
-  <TextWithIcon
-    TextSlot={<span>Expires on __. Read 4 times</span>}
-    IconSlot={<CountdownTimerIcon />}
-    classNameOverrides="text-xs text-secondary-text"
-  />
-);

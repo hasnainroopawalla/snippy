@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BadgeButtonWithAutoTextUpdate, TextAnchor } from "../factory";
+import { BadgeButtonWithTextUpdateOnClick, TextAnchor } from "../factory";
 import { copyToClipboard } from "../../utils";
 
 type ViewerToolbarProps = {
@@ -21,7 +21,7 @@ export const ViewerToolbar: React.FC<ViewerToolbarProps> = ({
 
   return (
     <div className="flex flex-row flex-wrap items-center gap-5">
-      <BadgeButtonWithAutoTextUpdate
+      <BadgeButtonWithTextUpdateOnClick
         variant="primary"
         size="large"
         text="Copy Text"

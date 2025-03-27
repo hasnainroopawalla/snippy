@@ -1,3 +1,5 @@
+import type { Privacy } from "./graphql/generated";
+
 export const SNIPPET_VALIDITY_OPTIONS = {
   "10m": "10 minutes",
   "1h": "1 hour",
@@ -28,6 +30,8 @@ export type ISnippet = {
   id: string;
   /* The unique, human readable identifier of the Snippet */
   slug: string;
+  /* The privacy of the snippet - Private/Protected/Public */
+  privacy: Privacy;
   /* The validity of the Snippet after which it is deleted from the DB */
   // validity: string;
   /* The raw string content of the Snippet */
