@@ -1,10 +1,9 @@
 import * as React from "react";
 import type { ISnippet } from "../../types";
-import { ViewerToolbar } from "./viewer-toolbar";
-import { ContentViewer } from "./content-viewer";
-import { SnippetMetadata } from "./snippet-metadata";
 import { SnippetPasswordSection } from "./password-section";
 import { isBlockedByPassword } from "./utils";
+import { useServices } from "../../contexts";
+import { SnippetSection } from "./snippet-section";
 
 type ViewSnippetScreenProps = { snippet: ISnippet };
 
@@ -15,46 +14,32 @@ export const ViewSnippetScreen: React.FC<ViewSnippetScreenProps> = ({
     isBlockedByPassword(snippet),
   );
 
+  const snippetRef = React.useRef<ISnippet>(snippet);
+
+  const { cryptoService } = useServices();
+
   const onPasswordValidationSuccess = React.useCallback(
-    () => setPasswordRequired(false),
-    [],
+    (rawPassword: string) => {
+      // Decrypt the content with the raw password
+      snippetRef.current.content = cryptoService.decrypt(
+        snippetRef.current.content,
+        rawPassword,
+      );
+      setPasswordRequired(false);
+    },
+    [cryptoService],
   );
 
   return (
     <>
       {passwordRequired ? (
         <SnippetPasswordSection
-          snippet={snippet}
+          snippet={snippetRef.current}
           onPasswordValidationSuccess={onPasswordValidationSuccess}
         />
       ) : (
-        <SnippetSection snippet={snippet} />
+        <SnippetSection snippet={snippetRef.current} />
       )}
     </>
-  );
-};
-
-type SnippetSectionProps = {
-  snippet: ISnippet;
-};
-
-const SnippetSection: React.FC<SnippetSectionProps> = ({ snippet }) => {
-  const contentViewerRef = React.useRef<HTMLTextAreaElement>(null);
-
-  return (
-    <div className="flex flex-col gap-6">
-      <ViewerToolbar
-        privacy={snippet.privacy}
-        contentViewerRef={contentViewerRef}
-      />
-      <div className="flex flex-col gap-3">
-        <ContentViewer
-          contentViewerRef={contentViewerRef}
-          slug={snippet.slug}
-          content={snippet.content}
-        />
-        <SnippetMetadata />
-      </div>
-    </div>
   );
 };

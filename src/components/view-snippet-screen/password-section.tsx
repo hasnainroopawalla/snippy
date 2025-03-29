@@ -11,7 +11,7 @@ import { useServices } from "../../contexts";
 
 type SnippetPasswordSection = {
   snippet: ISnippet;
-  onPasswordValidationSuccess: () => void;
+  onPasswordValidationSuccess: (rawPassword: string) => void;
 };
 
 export const SnippetPasswordSection: React.FC<SnippetPasswordSection> = ({
@@ -20,20 +20,20 @@ export const SnippetPasswordSection: React.FC<SnippetPasswordSection> = ({
 }) => {
   const passwordRef = React.useRef<HTMLInputElement>(null);
 
-  const { snippetService } = useServices();
+  const { cryptoService } = useServices();
 
   const validateAndSubmit = React.useCallback(() => {
     if (
       passwordRef.current &&
       snippet.passwordHash &&
-      snippetService.validatePasswordHash(
+      cryptoService.comparePasswordHash(
         snippet.passwordHash,
         passwordRef.current.value,
       )
     ) {
-      onPasswordValidationSuccess();
+      onPasswordValidationSuccess(passwordRef.current.value);
     }
-  }, [onPasswordValidationSuccess, snippet.passwordHash, snippetService]);
+  }, [onPasswordValidationSuccess, snippet.passwordHash, cryptoService]);
 
   return (
     <div className="flex flex-col flex-wrap gap-8">

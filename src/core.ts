@@ -8,7 +8,7 @@ import {
 } from "./services";
 
 export type ICore = {
-  services: { snippetService: SnippetService };
+  services: { snippetService: SnippetService; cryptoService: CryptoService };
 };
 
 export const initializeCore = async (): Promise<ICore> => {
@@ -35,6 +35,7 @@ export const initializeCore = async (): Promise<ICore> => {
   return {
     services: {
       snippetService,
+      cryptoService,
     },
   };
 };

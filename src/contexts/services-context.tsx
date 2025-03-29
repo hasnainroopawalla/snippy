@@ -1,8 +1,9 @@
 import * as React from "react";
-import { SnippetService } from "../services";
+import type { CryptoService, SnippetService } from "../services";
 
 export type IServicesContext = {
   snippetService: SnippetService;
+  cryptoService: CryptoService;
 };
 
 const ServicesContext = React.createContext<IServicesContext>(

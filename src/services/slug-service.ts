@@ -5,7 +5,7 @@ type SlugTokens = {
   nouns: string[];
 };
 
-const SLUG_SEPERATOR = "-";
+const SLUG_SEPARATOR = "-";
 
 export class SlugService {
   private slugTokens: SlugTokens;
@@ -18,7 +18,7 @@ export class SlugService {
     return [
       this.getRandomSlugToken("adjective"),
       this.getRandomSlugToken("noun"),
-    ].join(SLUG_SEPERATOR);
+    ].join(SLUG_SEPARATOR);
   }
 
   private getRandomSlugToken(kind: "adjective" | "noun"): string {

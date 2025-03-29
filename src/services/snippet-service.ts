@@ -7,7 +7,7 @@ import {
 import type { ICreateSnippetFormData, ISnippet } from "../types";
 import { MutationResultAdapters, QueryResultAdapters } from "./adapters";
 import type { SlugService } from "./slug-service";
-import { CryptoService } from "./crypto-service";
+import type { CryptoService } from "./crypto-service";
 
 type SnippetServiceProps = {
   apolloClient: ApolloClient<NormalizedCacheObject>;
@@ -29,20 +29,29 @@ export class SnippetService {
   public async createSnippet(
     variables: ICreateSnippetFormData,
   ): Promise<ISnippet | null> {
+    const { content, password, privacy, validity } = variables;
+
     const slug = this.slugService.generate();
+
+    const { content: contentPayload, password: passwordPayload } = password
+      ? this.encryptDataAndHashPassword({
+          content,
+          password,
+        })
+      : { content, password };
+
+    const mutationVariables = {
+      slug,
+      privacy,
+      validity,
+      passwordHash: passwordPayload,
+      content: contentPayload,
+    };
 
     return this.apolloClient
       .mutate({
         mutation: CREATE_SNIPPET_MUTATION,
-        variables: {
-          slug,
-          content: variables.content,
-          privacy: variables.privacy,
-          validity: variables.validity,
-          passwordHash: variables.password
-            ? this.cryptoService.hash(variables.password)
-            : "",
-        },
+        variables: mutationVariables,
       })
       .then(result => MutationResultAdapters.createSnippet(result));
   }
@@ -77,10 +86,19 @@ export class SnippetService {
 
   public deleteSnippet() {}
 
-  public validatePasswordHash(
-    snippetPasswordHash: string,
-    inputPasswordHash: string,
-  ): boolean {
-    return snippetPasswordHash === this.cryptoService.hash(inputPasswordHash);
+  /**
+   * Encrypts the content with the password string and then hashes the password.
+   */
+  private encryptDataAndHashPassword({
+    content,
+    password,
+  }: {
+    content: string;
+    password: string;
+  }) {
+    return {
+      content: this.cryptoService.encrypt(content, password),
+      password: this.cryptoService.hash(password),
+    };
   }
 }
