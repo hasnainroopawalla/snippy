@@ -5,7 +5,6 @@ import { ContentViewer } from "./content-viewer";
 import { SnippetMetadata } from "./snippet-metadata";
 import { SnippetPasswordSection } from "./password-section";
 import { isBlockedByPassword } from "./utils";
-import { SnippetPrivacyBadge } from "../snippet-info-badges";
 
 type ViewSnippetScreenProps = { snippet: ISnippet };
 
@@ -43,9 +42,11 @@ const SnippetSection: React.FC<SnippetSectionProps> = ({ snippet }) => {
   const contentViewerRef = React.useRef<HTMLTextAreaElement>(null);
 
   return (
-    <div className="flex flex-col gap-8">
-      <ViewerToolbar contentViewerRef={contentViewerRef} />
-      <SnippetPrivacyBadge privacy={snippet.privacy} />
+    <div className="flex flex-col gap-6">
+      <ViewerToolbar
+        privacy={snippet.privacy}
+        contentViewerRef={contentViewerRef}
+      />
       <div className="flex flex-col gap-3">
         <ContentViewer
           contentViewerRef={contentViewerRef}
