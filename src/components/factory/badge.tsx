@@ -18,7 +18,7 @@ export const Badge: React.FC<BadgeProps> = ({ color, text }) => (
   </span>
 );
 
-type BadgeWithIconProps = BadgeProps & {
+export type BadgeWithIconProps = BadgeProps & {
   IconSlot: React.ReactElement;
 };
 

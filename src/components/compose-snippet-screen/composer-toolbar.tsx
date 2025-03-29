@@ -1,7 +1,10 @@
 import * as React from "react";
 import { InputWithLabel, SelectWithLabel } from "../factory";
 import { SnippetValidity, SnippetPrivacy } from "../../types";
-import { SnippetInfoPanel } from "./snippet-info-panel";
+import {
+  RealTimeSnippetValidityBadge,
+  SnippetPrivacyBadge,
+} from "../snippet-info-badges";
 
 type ComposerToolbarProps = {
   validityRef: React.MutableRefObject<SnippetValidity>;
@@ -69,7 +72,10 @@ export const ComposerToolbar: React.FC<ComposerToolbarProps> = ({
           />
         )}
       </div>
-      <SnippetInfoPanel validity={validity} privacy={privacy} />
+      <div className="flex flex-row flex-wrap gap-2">
+        <RealTimeSnippetValidityBadge validity={validity} />
+        <SnippetPrivacyBadge privacy={privacy} />
+      </div>
     </div>
   );
 };
