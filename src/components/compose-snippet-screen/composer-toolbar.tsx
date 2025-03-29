@@ -1,11 +1,6 @@
 import * as React from "react";
 import { InputWithLabel, SelectWithLabel } from "../factory";
-import {
-  SnippetValidity,
-  SNIPPET_VALIDITY_OPTIONS,
-  SNIPPET_PRIVACY_OPTIONS,
-  SnippetPrivacy,
-} from "../../types";
+import { SnippetValidity, SnippetPrivacy } from "../../types";
 import { SnippetInfoPanel } from "./snippet-info-panel";
 
 type ComposerToolbarProps = {
@@ -53,19 +48,19 @@ export const ComposerToolbar: React.FC<ComposerToolbarProps> = ({
       <div className="flex flex-row flex-wrap gap-4">
         <SelectWithLabel
           label="Validity"
-          items={SNIPPET_VALIDITY_OPTIONS}
+          items={SnippetValidity}
           selectClassNameOverrides={"w-[150px]"}
           onItemSelect={onSelectValidity}
           initialValue={validity}
         />
         <SelectWithLabel
           label="Privacy"
-          items={SNIPPET_PRIVACY_OPTIONS}
+          items={SnippetPrivacy}
           selectClassNameOverrides={"w-[120px]"}
           onItemSelect={onSelectPrivacy}
           initialValue={privacy}
         />
-        {privacy !== "public" && (
+        {privacy !== SnippetPrivacy.Public && (
           <InputWithLabel
             inputRef={passwordRef}
             onChange={onChangePassword}

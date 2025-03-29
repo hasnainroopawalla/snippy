@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useServices } from "../../contexts";
-import type { ICreateSnippetFormData } from "../../types";
+import { SnippetPrivacy, type ICreateSnippetFormData } from "../../types";
 
 export const useCreateSnippet = () => {
   const { snippetService } = useServices();
@@ -33,10 +33,13 @@ export const isValidCreateSnippetData = (
       // privacy should not be empty
       snippetData.privacy &&
       // password should exist if private snippet
-      ((snippetData.privacy === "private" && snippetData.password) ||
+      ((snippetData.privacy === SnippetPrivacy.Private &&
+        snippetData.password) ||
         // password should exist if protected snippet
-        (snippetData.privacy === "protected" && snippetData.password) ||
+        (snippetData.privacy === SnippetPrivacy.Protected &&
+          snippetData.password) ||
         // password should not exist if public snippet
-        (snippetData.privacy === "public" && !snippetData.password))
+        (snippetData.privacy === SnippetPrivacy.Public &&
+          !snippetData.password))
     )
   );

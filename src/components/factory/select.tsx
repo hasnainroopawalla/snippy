@@ -2,13 +2,14 @@ import * as React from "react";
 import * as SelectFct from "@radix-ui/react-select";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import classNames from "classnames";
+import type { EnumToUnion, UnionOfValues } from "../../utils";
 
-type ISelectItem = { [key: string]: string };
+type ISelectItem = Record<string, string>;
 
 type SelectProps<T extends ISelectItem> = {
-  initialValue: keyof T;
+  initialValue: EnumToUnion<T>;
   items: T;
-  onItemSelect: (item: keyof T) => void;
+  onItemSelect: (item: UnionOfValues<T>) => void;
   selectClassNameOverrides?: string;
 };
 
@@ -18,10 +19,7 @@ const Select = <T extends ISelectItem>({
   initialValue,
   selectClassNameOverrides,
 }: SelectProps<T>) => (
-  <SelectFct.Root
-    defaultValue={initialValue.toString()}
-    onValueChange={onItemSelect}
-  >
+  <SelectFct.Root defaultValue={initialValue} onValueChange={onItemSelect}>
     <SelectFct.Trigger
       className={classNames(
         "h-[45px] flex flex-row justify-between text-md items-center gap-2 rounded bg-secondary-bg px-[15px] text-primary-text cursor-pointer focus:outline-accent focus:outline-1",
@@ -37,7 +35,7 @@ const Select = <T extends ISelectItem>({
       <SelectFct.Viewport className="p-[7px]">
         <SelectFct.Group>
           {Object.entries(items).map(([value, text]) => (
-            <SelectItem key={value} value={value} text={text} />
+            <SelectItem key={value} value={text} text={text} />
           ))}
         </SelectFct.Group>
       </SelectFct.Viewport>

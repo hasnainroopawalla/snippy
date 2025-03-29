@@ -1,12 +1,12 @@
 import * as React from "react";
-import type { SnippetValidity, SnippetPrivacy } from "../../types";
+import { SnippetValidity, SnippetPrivacy } from "../../types";
 import { ButtonsPanel } from "./buttons-panel";
 import { ContentEditor } from "./content-editor";
 import { ComposerToolbar } from "./composer-toolbar";
 
 export const ComposeSnippetScreen: React.FC = () => {
-  const validityRef = React.useRef<SnippetValidity>("10m");
-  const privacyRef = React.useRef<SnippetPrivacy>("public");
+  const validityRef = React.useRef<SnippetValidity>(SnippetValidity["10m"]);
+  const privacyRef = React.useRef<SnippetPrivacy>(SnippetPrivacy.Public);
   const passwordRef = React.useRef<HTMLInputElement>(null);
   const contentEditorRef = React.useRef<HTMLTextAreaElement>(null);
 

@@ -1,26 +1,18 @@
-import type { Privacy } from "./graphql/generated";
+import { Privacy } from "./graphql/generated";
 
-export const SNIPPET_VALIDITY_OPTIONS = {
-  "10m": "10 minutes",
-  "1h": "1 hour",
-  "1d": "1 day",
-};
+export enum SnippetValidity {
+  "10m" = "10 minutes",
+  "1h" = "1 hour",
+  "1d" = "1 day",
+}
 
 export const validityToMinutesMap: Record<SnippetValidity, number> = {
-  "10m": 10,
-  "1h": 60,
-  "1d": 1440,
+  [SnippetValidity["10m"]]: 10,
+  [SnippetValidity["1h"]]: 60,
+  [SnippetValidity["1d"]]: 1440,
 };
 
-export type SnippetValidity = keyof typeof SNIPPET_VALIDITY_OPTIONS;
-
-export const SNIPPET_PRIVACY_OPTIONS = {
-  public: "Public",
-  protected: "Protected",
-  private: "Private",
-};
-
-export type SnippetPrivacy = keyof typeof SNIPPET_PRIVACY_OPTIONS;
+export { Privacy as SnippetPrivacy };
 
 /**
  * Represents a Snippet in the DB.
@@ -50,15 +42,15 @@ export type ICreateSnippetFormData = {
   validity: SnippetValidity; // TODO: experiment with ways to store in DB
 } & (
   | {
-      privacy: Extract<SnippetPrivacy, "public">;
+      privacy: Privacy.Public;
       password: string | null | undefined;
     }
   | {
-      privacy: Extract<SnippetPrivacy, "protected">;
+      privacy: Privacy.Protected;
       password: string;
     }
   | {
-      privacy: Extract<SnippetPrivacy, "private">;
+      privacy: Privacy.Private;
       password: string;
     }
 );

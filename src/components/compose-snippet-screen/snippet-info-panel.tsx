@@ -38,12 +38,12 @@ export const SnippetInfoPanel: React.FC<SnippetInfoPanelProps> = ({
     <div className="flex flex-row flex-wrap gap-2">
       <LiveValidityInfoBadge validity={validity} />
       <BadgeWithIcon
-        color="green"
+        color="blue"
         text={privacyBadgeText}
         IconSlot={privacyBadgeIcon}
       />
       <BadgeWithIcon
-        color="orange"
+        color="green"
         text={passwordBadgeText}
         IconSlot={passwordBadgeIcon}
       />
@@ -71,7 +71,7 @@ const LiveValidityInfoBadge: React.FC<LiveValidityInfoBadgeProps> = ({
 
   return (
     <BadgeWithIcon
-      color="blue"
+      color="orange"
       text={`${expiresOn}`}
       IconSlot={<CountdownTimerIcon />}
     />
@@ -80,7 +80,7 @@ const LiveValidityInfoBadge: React.FC<LiveValidityInfoBadgeProps> = ({
 
 const getBadgeText = (privacy: SnippetPrivacy) => {
   switch (privacy) {
-    case "public":
+    case SnippetPrivacy.Public:
       return {
         privacyBadgeText: "Everyone",
         privacyBadgeIcon: <EyeOpenIcon />,
@@ -88,7 +88,7 @@ const getBadgeText = (privacy: SnippetPrivacy) => {
         passwordBadgeIcon: <LockOpen2Icon />,
       };
 
-    case "protected":
+    case SnippetPrivacy.Protected:
       return {
         privacyBadgeText: "Everyone",
         privacyBadgeIcon: <EyeOpenIcon />,
@@ -96,7 +96,7 @@ const getBadgeText = (privacy: SnippetPrivacy) => {
         passwordBadgeIcon: <LockClosedIcon />,
       };
 
-    case "private":
+    case SnippetPrivacy.Private:
       return {
         privacyBadgeText: "No one",
         privacyBadgeIcon: <EyeNoneIcon />,

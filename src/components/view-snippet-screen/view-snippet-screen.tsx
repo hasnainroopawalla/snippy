@@ -5,6 +5,8 @@ import { ContentViewer } from "./content-viewer";
 import { SnippetMetadata } from "./snippet-metadata";
 import { SnippetPasswordSection } from "./password-section";
 import { isBlockedByPassword } from "./utils";
+import { EyeOpenIcon } from "@radix-ui/react-icons";
+import { BadgeWithIcon } from "../factory";
 
 type ViewSnippetScreenProps = { snippet: ISnippet };
 
@@ -44,6 +46,11 @@ const SnippetSection: React.FC<SnippetSectionProps> = ({ snippet }) => {
   return (
     <div className="flex flex-col gap-8">
       <ViewerToolbar contentViewerRef={contentViewerRef} />
+      <BadgeWithIcon
+        color="green"
+        text={snippet.privacy}
+        IconSlot={<EyeOpenIcon />}
+      />
       <div className="flex flex-col gap-3">
         <ContentViewer
           contentViewerRef={contentViewerRef}

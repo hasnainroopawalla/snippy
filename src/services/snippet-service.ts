@@ -5,11 +5,7 @@ import {
   GET_SNIPPET_BY_SLUG_QUERY,
 } from "../graphql";
 import type { ICreateSnippetFormData, ISnippet } from "../types";
-import {
-  MutationResultAdapters,
-  QueryResultAdapters,
-  VariableAdapters,
-} from "./adapters";
+import { MutationResultAdapters, QueryResultAdapters } from "./adapters";
 import type { SlugService } from "./slug-service";
 import { CryptoService } from "./crypto-service";
 
@@ -41,7 +37,7 @@ export class SnippetService {
         variables: {
           slug,
           content: variables.content,
-          privacy: VariableAdapters.snippetPrivacy(variables.privacy),
+          privacy: variables.privacy,
           validity: variables.validity,
           passwordHash: variables.password
             ? this.cryptoService.hash(variables.password)
