@@ -8,7 +8,7 @@ export const Route = createRootRouteWithContext<IRootRouterWithContext>()({
   component: () => (
     <div
       id="container"
-      className="container flex flex-col gap-10 p-5 mx-auto mt-5 lg:px-35"
+      className="container flex flex-col gap-10 px-5 pt-10 mx-auto lg:px-35 bg-primary-bg"
     >
       <Navbar />
       <Outlet />

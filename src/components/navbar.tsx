@@ -18,7 +18,10 @@ export const Navbar: React.FC = () => {
         <TextAnchor label="Find" onClick={() => {}} />
         <TextAnchor label="Help" onClick={() => {}} />
       </div>
-      <SunIcon className="cursor-pointer text-primary-text" />
+      <SunIcon
+        className="cursor-pointer text-primary-text"
+        onClick={() => document.body.classList.toggle("light")}
+      />
     </div>
   );
 };

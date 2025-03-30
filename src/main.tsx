@@ -9,6 +9,10 @@ initializeCore().then(core => {
   if (!rootElement.innerHTML) {
     const root = ReactDOM.createRoot(rootElement);
 
-    root.render(<ContextualApp core={core} />);
+    root.render(
+      <div id="root-container" className="w-screen h-screen bg-primary-bg">
+        <ContextualApp core={core} />
+      </div>,
+    );
   }
 });

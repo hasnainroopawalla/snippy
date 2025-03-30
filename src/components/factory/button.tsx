@@ -17,7 +17,7 @@ export const Button: React.FC<ButtonProps> = ({
 }) => (
   <button
     className={classNames(
-      "px-4 py-2 transition duration-200 w-[100px] rounded focus:outline-1 text-primary-text text-md",
+      "px-4 py-2 transition duration-200 w-[100px] rounded focus:outline-1 text-primary-button-text text-md",
       variant === "primary"
         ? "bg-accent hover:bg-accent-offset outline-accent-offset"
         : "bg-secondary-bg hover:bg-secondary-bg-offset outline-secondary-bg-offset",
@@ -33,7 +33,7 @@ export const Button: React.FC<ButtonProps> = ({
 const ButtonSpinner = () => (
   <span className="flex items-center justify-center">
     <svg
-      className="w-5 h-5 animate-spin text-primary-text"
+      className="w-5 h-5 animate-spin text-primary-button-text"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
@@ -63,11 +63,11 @@ export const BadgeButton: React.FC<BadgeButtonProps> = ({
 }) => (
   <span
     className={classNames(
-      "inline-flex items-center px-3 rounded-md cursor-pointer text-primary-text",
+      "inline-flex items-center px-3 rounded-md cursor-pointer",
       size === "large" ? "py-2 text-sm" : " py-1 text-xs",
       variant === "primary"
-        ? "bg-accent hover:bg-accent-offset"
-        : "bg-secondary-bg hover:bg-primary-bg",
+        ? "bg-accent hover:bg-accent-offset text-primary-button-text"
+        : "bg-secondary-bg hover:bg-primary-bg text-primary-text",
     )}
     onClick={onClick}
   >
