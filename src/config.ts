@@ -1,6 +1,3 @@
 export const config = {
-  dataSize: {
-    rows: 2,
-    columns: 26,
-  },
+  githubRepoUrl: "https://github.com/hasnainroopawalla/snippy",
 };

@@ -15,8 +15,11 @@ export const ThemeSwitcher: React.FC = () => {
   const Icon = theme === "light" ? MoonIcon : SunIcon;
 
   return (
-    <div className="p-1 rounded cursor-pointer hover:bg-secondary-bg">
-      <Icon className="w-4.5 h-4.5 text-primary-text" onClick={onToggle} />
+    <div
+      className="p-2 rounded-lg cursor-pointer hover:bg-secondary-bg"
+      onClick={onToggle}
+    >
+      <Icon className="w-4 h-4 text-primary-text" />
     </div>
   );
 };

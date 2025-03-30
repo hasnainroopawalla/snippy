@@ -11,4 +11,7 @@ export default defineConfig({
     tailwindcss(),
     nodePolyfills(),
   ],
+  define: {
+    APP_VERSION: JSON.stringify(process.env.npm_package_version),
+  },
 });

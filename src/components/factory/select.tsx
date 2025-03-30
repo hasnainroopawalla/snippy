@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as SelectFct from "@radix-ui/react-select";
-import { ChevronDownIcon } from "@radix-ui/react-icons";
+import { ChevronDownIcon, InfoCircledIcon } from "@radix-ui/react-icons";
 import classNames from "classnames";
 import type { EnumToUnion, UnionOfValues } from "../../utils";
 
@@ -67,7 +67,10 @@ export const SelectWithLabel = <T extends ISelectItem>(
   props: SelectWithLabelProps<T>,
 ) => (
   <div className="flex flex-col gap-2">
-    <span className="text-secondary-text">{props.label}</span>
+    <span className="flex flex-row items-center gap-3 text-secondary-text">
+      {props.label}
+      <InfoCircledIcon />
+    </span>
     <Select {...props} />
   </div>
 );

@@ -1,6 +1,6 @@
 import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
 import type { IServicesContext } from "../contexts/services-context";
-import { Navbar } from "../components";
+import { Navbar, Footer } from "../components";
 
 export type IRootRouterWithContext = { services: IServicesContext };
 
@@ -12,6 +12,7 @@ export const Route = createRootRouteWithContext<IRootRouterWithContext>()({
     >
       <Navbar />
       <Outlet />
+      <Footer />
     </div>
   ),
 });

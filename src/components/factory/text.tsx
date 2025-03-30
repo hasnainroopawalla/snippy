@@ -5,18 +5,21 @@ type TextWithIconProps = {
   TextSlot: React.ReactElement;
   IconSlot: React.ReactElement;
   classNameOverrides?: string;
+  onClick?: () => void;
 };
 
 export const TextWithIcon: React.FC<TextWithIconProps> = ({
   TextSlot,
   IconSlot,
   classNameOverrides,
+  onClick
 }) => (
   <div
     className={classNames(
       "flex flex-row items-center gap-2 text-primary-text",
       classNameOverrides,
     )}
+    onClick={onClick}
   >
     {IconSlot}
     {TextSlot}
