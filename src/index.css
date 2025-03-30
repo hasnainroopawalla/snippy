@@ -1,21 +1,73 @@
 @import "tailwindcss";
 
-/* TODO: Migrate more repeated stuff to theme. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-mono: "Fira code", "Fira Mono", monospace;
+
+  --color-*: initial;
+
+  /* dark mode */
+  --color-primary-bg: #18191a;
+  --color-secondary-bg: #242526;
+  --color-secondary-bg-offset: #303132;
+
+  --color-primary-text: #e4e6eb;
+  --color-primary-button-text: #e4e6eb;
+  --color-secondary-text: #b0b3b8;
+
+  --color-accent: #4338ca;
+  --color-accent-offset: #362c9e;
+  --color-error: #d64545;
+  --color-anchor: #6a5acd;
+
+  /* badges */
+  --color-badge-orange: #331e0f;
+  --color-badge-orange-text: #ff9a50;
+
+  --color-badge-blue: #0d2849;
+  --color-badge-blue-text: #66b6fb;
+
+  --color-badge-green: #142c23;
+  --color-badge-green-text: #3ac883;
+
+  --color-badge-red: #7a2828;
+  --color-badge-red-text: #ff7373;
 }
 
-body {
-  @apply bg-gray-100 dark:bg-gray-800;
+@layer theme {
+  .light {
+    --color-primary-bg: #f8f9fa;
+    --color-secondary-bg: #ececec;
+    --color-secondary-bg-offset: #e0e0e0;
+
+    --color-primary-text: #18191a;
+    --color-primary-button-text: #e4e6eb;
+    --color-secondary-text: #545454;
+
+    --color-accent: #675adc;
+    --color-accent-offset: #8674d6;
+    --color-error: #ff6a6a;
+    --color-anchor: #8a7afd;
+
+    /* badges */
+    --color-badge-orange: #ffe9d8;
+    --color-badge-orange-text: #993800;
+
+    --color-badge-blue: #d8e9ff;
+    --color-badge-blue-text: #003366;
+
+    --color-badge-green: #d6f5e1;
+    --color-badge-green-text: #005c34;
+
+    --color-badge-red: #f9d3d3;
+    --color-badge-red-text: #7a0000;
+  }
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-a {
-  @apply text-gray-800 dark:text-gray-100;
+/* Controls the peek at password (eye) color in <input> elements. */
+@layer utilities {
+  input[type="password"]::-ms-reveal {
+    filter: invert(50%); /* Adjusts the icon's color contrast */
+  }
 }

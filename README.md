@@ -1,3 +1,3 @@
-## AirClip
+## Snippy
 
 `yarn && yarn start`
