@@ -15,7 +15,7 @@ export const Tooltip: React.FC<TooltipProps> = ({ content, children }) => (
         sideOffset={5}
       >
         {content}
-        <TooltipFct.Arrow className="fill-secbg-secondary-bg" />
+        <TooltipFct.Arrow className="fill-secondary-bg" />
       </TooltipFct.Content>
     </TooltipFct.Root>
   </TooltipFct.Provider>

@@ -1,5 +1,6 @@
 import * as React from "react";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
+import { Button } from "./factory";
 
 type ITheme = "light" | "dark";
 
@@ -15,6 +16,8 @@ export const ThemeSwitcher: React.FC = () => {
   const Icon = theme === "light" ? MoonIcon : SunIcon;
 
   return (
-    <Icon className="cursor-pointer text-primary-text" onClick={onToggle} />
+    <div className="p-1 rounded cursor-pointer hover:bg-secondary-bg">
+      <Icon className="w-4.5 h-4.5 text-primary-text" onClick={onToggle} />
+    </div>
   );
 };
