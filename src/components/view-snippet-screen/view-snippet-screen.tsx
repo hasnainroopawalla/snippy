@@ -30,16 +30,12 @@ export const ViewSnippetScreen: React.FC<ViewSnippetScreenProps> = ({
     [cryptoService],
   );
 
-  return (
-    <>
-      {passwordRequired ? (
-        <SnippetPasswordSection
-          snippet={snippetRef.current}
-          onPasswordValidationSuccess={onPasswordValidationSuccess}
-        />
-      ) : (
-        <SnippetSection snippet={snippetRef.current} />
-      )}
-    </>
+  return passwordRequired ? (
+    <SnippetPasswordSection
+      snippet={snippetRef.current}
+      onPasswordValidationSuccess={onPasswordValidationSuccess}
+    />
+  ) : (
+    <SnippetSection snippet={snippetRef.current} />
   );
 };

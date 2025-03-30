@@ -1,11 +1,7 @@
 import * as React from "react";
 import type { ISnippet } from "../../types";
 import { FileTextIcon } from "@radix-ui/react-icons";
-import {
-  BadgeButtonWithTextUpdateOnClick,
-  Textarea,
-  TextWithIcon,
-} from "../factory";
+import { DynamicCompactButton, Textarea, TextWithIcon } from "../factory";
 import { copyToClipboard } from "../../utils";
 
 type ContentViewerProps = {
@@ -37,7 +33,7 @@ export const ContentViewer: React.FC<ContentViewerProps> = ({
         />
       }
       HeaderButtonSlot={
-        <BadgeButtonWithTextUpdateOnClick
+        <DynamicCompactButton
           variant="secondary"
           size="small"
           text="Copy URL"

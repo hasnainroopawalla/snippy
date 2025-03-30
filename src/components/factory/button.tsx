@@ -47,15 +47,14 @@ const ButtonSpinner = () => (
   </span>
 );
 
-type BadgeButtonProps = {
+type CompactButtonProps = {
   variant: ButtonVariant;
   size: "small" | "large";
   text: string;
   onClick: () => void;
 };
 
-// TODO: rename
-export const BadgeButton: React.FC<BadgeButtonProps> = ({
+export const CompactButton: React.FC<CompactButtonProps> = ({
   variant,
   size,
   text,
@@ -75,13 +74,16 @@ export const BadgeButton: React.FC<BadgeButtonProps> = ({
   </span>
 );
 
-type BadgeButtonWithTextUpdateOnClickProps = BadgeButtonProps & {
+type DynamicCompactButtonProps = CompactButtonProps & {
   postClickText: string;
 };
 
-export const BadgeButtonWithTextUpdateOnClick: React.FC<
-  BadgeButtonWithTextUpdateOnClickProps
-> = ({ postClickText, onClick, text: initialText, ...props }) => {
+export const DynamicCompactButton: React.FC<DynamicCompactButtonProps> = ({
+  postClickText,
+  onClick,
+  text: initialText,
+  ...props
+}) => {
   const { onClickWithTextUpdate, buttonText } = useButtonTextUpdateOnClick({
     callback: onClick,
     initialText,
@@ -89,6 +91,10 @@ export const BadgeButtonWithTextUpdateOnClick: React.FC<
   });
 
   return (
-    <BadgeButton onClick={onClickWithTextUpdate} text={buttonText} {...props} />
+    <CompactButton
+      onClick={onClickWithTextUpdate}
+      text={buttonText}
+      {...props}
+    />
   );
 };

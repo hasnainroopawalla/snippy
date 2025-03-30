@@ -1,7 +1,7 @@
 import * as React from "react";
 import { TextAnchor } from "./factory";
 import { useNavigate } from "@tanstack/react-router";
-import { SunIcon } from "@radix-ui/react-icons";
+import { ThemeSwitcher } from "./theme-switcher";
 
 export const Navbar: React.FC = () => {
   const navigate = useNavigate();
@@ -18,10 +18,7 @@ export const Navbar: React.FC = () => {
         <TextAnchor label="Find" onClick={() => {}} />
         <TextAnchor label="Help" onClick={() => {}} />
       </div>
-      <SunIcon
-        className="cursor-pointer text-primary-text"
-        onClick={() => document.body.classList.toggle("light")}
-      />
+      <ThemeSwitcher />
     </div>
   );
 };

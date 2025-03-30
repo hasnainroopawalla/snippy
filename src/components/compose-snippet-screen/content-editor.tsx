@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BadgeButton, Textarea, TextWithIcon } from "../factory";
+import { CompactButton, Textarea, TextWithIcon } from "../factory";
 import { Pencil2Icon } from "@radix-ui/react-icons";
 
 type ContentEditorProps = {
@@ -28,7 +28,7 @@ export const ContentEditor: React.FC<ContentEditorProps> = ({
         />
       }
       HeaderButtonSlot={
-        <BadgeButton
+        <CompactButton
           variant="secondary"
           size="small"
           text="Clear"

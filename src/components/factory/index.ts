@@ -1,9 +1,5 @@
 export { SelectWithLabel } from "./select";
-export {
-  Button,
-  BadgeButton,
-  BadgeButtonWithTextUpdateOnClick,
-} from "./button";
+export { Button, CompactButton, DynamicCompactButton } from "./button";
 export { Tooltip } from "./tooltip";
 export { TextWithIcon, TextAnchor } from "./text";
 export { Textarea } from "./textarea";
