@@ -1,6 +1,5 @@
 import * as React from "react";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
-import { Button } from "./factory";
 
 type ITheme = "light" | "dark";
 
