@@ -12,7 +12,7 @@ export const TextWithIcon: React.FC<TextWithIconProps> = ({
   TextSlot,
   IconSlot,
   classNameOverrides,
-  onClick
+  onClick,
 }) => (
   <div
     className={classNames(
@@ -29,10 +29,16 @@ export const TextWithIcon: React.FC<TextWithIconProps> = ({
 type TextAnchorProps = {
   label: string;
   onClick: () => void;
+  testId?: string;
 };
 
-export const TextAnchor: React.FC<TextAnchorProps> = ({ label, onClick }) => (
+export const TextAnchor: React.FC<TextAnchorProps> = ({
+  testId,
+  label,
+  onClick,
+}) => (
   <span
+    data-testid={testId}
     className="cursor-pointer text-accent hover:underline"
     onClick={onClick}
   >

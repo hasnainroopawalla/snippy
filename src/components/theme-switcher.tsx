@@ -16,6 +16,7 @@ export const ThemeSwitcher: React.FC = () => {
 
   return (
     <div
+      data-testid="theme-switcher"
       className="p-2 rounded-lg cursor-pointer hover:bg-secondary-bg"
       onClick={onToggle}
     >

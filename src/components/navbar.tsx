@@ -14,9 +14,21 @@ export const Navbar: React.FC = () => {
         <span className="font-mono cursor-default text-primary-text">
           ✂️ Snippy
         </span>
-        <TextAnchor label="New" onClick={onClickNew} />
-        <TextAnchor label="Find" onClick={() => {}} />
-        <TextAnchor label="Help" onClick={() => {}} />
+        <TextAnchor
+          testId="navbar-new-anchor"
+          label="New"
+          onClick={onClickNew}
+        />
+        <TextAnchor
+          testId="navbar-find-anchor"
+          label="Find"
+          onClick={() => {}}
+        />
+        <TextAnchor
+          testId="navbar-help-anchor"
+          label="Help"
+          onClick={() => {}}
+        />
       </div>
       <ThemeSwitcher />
     </div>

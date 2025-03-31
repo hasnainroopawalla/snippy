@@ -2,8 +2,12 @@ import "./index.css";
 import ReactDOM from "react-dom/client";
 import { ContextualApp } from "./app";
 import { initializeCore } from "./core";
+import { initializeCoreMock } from "./__mocks__";
 
-initializeCore().then(core => {
+(import.meta.env.MODE === "test"
+  ? initializeCoreMock()
+  : initializeCore()
+).then(core => {
   const rootElement = document.getElementById("root") as HTMLElement;
 
   if (!rootElement.innerHTML) {
