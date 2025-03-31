@@ -23,7 +23,7 @@ export const SnippetSection: React.FC<SnippetSectionProps> = ({ snippet }) => {
           slug={snippet.slug}
           content={snippet.content}
         />
-        <SnippetMetadata />
+        <SnippetMetadata expiresAt={snippet.expiresAt} />
       </div>
     </div>
   );

@@ -1,12 +1,25 @@
 import * as React from "react";
 import { CountdownTimerIcon } from "@radix-ui/react-icons";
 import { TextWithIcon } from "../factory";
+import { convertDateToString } from "../../utils";
 
-// TODO
-export const SnippetMetadata: React.FC = () => (
-  <TextWithIcon
-    TextSlot={<span>Expires on __. Read 4 times</span>}
-    IconSlot={<CountdownTimerIcon />}
-    classNameOverrides="text-xs text-secondary-text"
-  />
-);
+type SnippetMetadataProps = {
+  expiresAt: string;
+};
+
+export const SnippetMetadata: React.FC<SnippetMetadataProps> = ({
+  expiresAt,
+}) => {
+  const expiresAtDateString = React.useMemo(
+    () => convertDateToString(new Date(expiresAt)),
+    [expiresAt],
+  );
+
+  return (
+    <TextWithIcon
+      TextSlot={<span>Expires on {expiresAtDateString}</span>}
+      IconSlot={<CountdownTimerIcon />}
+      classNameOverrides="text-xs text-secondary-text"
+    />
+  );
+};

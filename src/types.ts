@@ -24,12 +24,12 @@ export type ISnippet = {
   slug: string;
   /* The privacy of the snippet - Private/Protected/Public */
   privacy: Privacy;
-  /* The validity of the Snippet after which it is deleted from the DB */
-  // validity: string;
   /* The raw string content of the Snippet */
   content: string;
   /* The timestamp of when the Snippet was created */
   createdAt: string;
+  /* The timestamp of when the Snippet will expire */
+  expiresAt: string;
   /* The hashed password string */
   passwordHash: string | null | undefined;
 };
@@ -39,7 +39,7 @@ export type ISnippet = {
  */
 export type ICreateSnippetFormData = {
   content: ISnippet["content"];
-  validity: SnippetValidity; // TODO: experiment with ways to store in DB
+  validity: SnippetValidity;
 } & (
   | {
       privacy: Privacy.Public;

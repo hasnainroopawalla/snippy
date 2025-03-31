@@ -19,7 +19,7 @@ export const ComposerToolbar: React.FC<ComposerToolbarProps> = ({
 }) => {
   const [validity, setValidity] = React.useState(validityRef.current);
   const [privacy, setPrivacy] = React.useState(privacyRef.current);
-  const [password, setPassword] = React.useState(
+  const [_password, setPassword] = React.useState(
     passwordRef.current?.value || "",
   );
 

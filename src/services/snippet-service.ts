@@ -1,13 +1,20 @@
+/* eslint-disable camelcase */
 import type { ApolloClient, NormalizedCacheObject } from "@apollo/client";
 import {
   CREATE_SNIPPET_MUTATION,
   GET_SNIPPET_BY_ID_QUERY,
   GET_SNIPPET_BY_SLUG_QUERY,
 } from "../graphql";
-import type { ICreateSnippetFormData, ISnippet } from "../types";
+import {
+  validityToMinutesMap,
+  type ICreateSnippetFormData,
+  type ISnippet,
+  type SnippetValidity,
+} from "../types";
 import { MutationResultAdapters, QueryResultAdapters } from "./adapters";
 import type { SlugService } from "./slug-service";
 import type { CryptoService } from "./crypto-service";
+import { addMinutesToDate } from "../utils";
 
 type SnippetServiceProps = {
   apolloClient: ApolloClient<NormalizedCacheObject>;
@@ -34,16 +41,14 @@ export class SnippetService {
     const slug = this.slugService.generate();
 
     const { content: contentPayload, password: passwordPayload } = password
-      ? this.encryptDataAndHashPassword({
-          content,
-          password,
-        })
+      ? this.encryptDataAndHashPassword(content, password)
       : { content, password };
 
     const mutationVariables = {
       slug,
       privacy,
       validity,
+      expires_at: this.getExpiresAtDateString(validity),
       passwordHash: passwordPayload,
       content: contentPayload,
     };
@@ -89,16 +94,17 @@ export class SnippetService {
   /**
    * Encrypts the content with the password string and then hashes the password.
    */
-  private encryptDataAndHashPassword({
-    content,
-    password,
-  }: {
-    content: string;
-    password: string;
-  }) {
+  private encryptDataAndHashPassword(content: string, password: string) {
     return {
       content: this.cryptoService.encrypt(content, password),
       password: this.cryptoService.hash(password),
     };
+  }
+
+  private getExpiresAtDateString(validity: SnippetValidity): string {
+    return addMinutesToDate(
+      new Date(),
+      validityToMinutesMap[validity],
+    ).toISOString();
   }
 }
