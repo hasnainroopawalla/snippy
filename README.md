@@ -5,8 +5,8 @@ A lightning-fast platform for seamless data transfer across devices using sharea
 🚀 Check it out at - [snippyio.vercel.app](snippyio.vercel.app)
 
 <p align="center">
-<img height="250" alt="homepage_screenshot" src="https://github.com/user-attachments/assets/c425a5ca-ccbe-477b-8d2f-0a39de8afb9c" />
-<img height="250" alt="view_screenshot" src="https://github.com/user-attachments/assets/518d6bb6-a52b-40a4-91dc-8d37dfb5c521" />
+<img alt="homepage_screenshot" src="https://github.com/user-attachments/assets/c425a5ca-ccbe-477b-8d2f-0a39de8afb9c" />
+<img alt="view_screenshot" src="https://github.com/user-attachments/assets/518d6bb6-a52b-40a4-91dc-8d37dfb5c521" />
 </p>
 
 ## Features
