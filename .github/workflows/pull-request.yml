@@ -6,6 +6,11 @@ on:
 jobs:
   Pull-Request-CI:
     runs-on: ubuntu-latest
+    env:
+      VITE_SUPABASE_BASE_URL: ${{ secrets.VITE_SUPABASE_BASE_URL }}
+      VITE_SUPABASE_API_KEY: ${{ secrets.VITE_SUPABASE_API_KEY }}
+      VITE_SUPABASE_DATA_URL: ${{ secrets.VITE_SUPABASE_DATA_URL }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -18,9 +23,6 @@ jobs:
 
       - name: Install dependencies
         run: yarn install
-        env:
-          VITE_SUPABASE_BASE_URL: ${{ secrets.VITE_SUPABASE_BASE_URL }}
-          VITE_SUPABASE_API_KEY: ${{ secrets.VITE_SUPABASE_API_KEY }}
 
       - name: Lint
         run: yarn lint
