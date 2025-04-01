@@ -2,7 +2,7 @@
 
 A lightning-fast platform for seamless data transfer across devices using shareable URLs.
 
-🚀 Check it out at - [snippyio.vercel.app](snippyio.vercel.app)
+🚀 Check it out at - [snippyio.vercel.app](https://snippyio.vercel.app/)
 
 <p align="center">
 <img alt="homepage_screenshot" src="https://github.com/user-attachments/assets/c425a5ca-ccbe-477b-8d2f-0a39de8afb9c" />
