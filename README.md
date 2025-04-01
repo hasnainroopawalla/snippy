@@ -6,6 +6,7 @@ A lightning-fast platform for seamless data transfer across devices using sharea
 
 <p align="center">
 <img alt="homepage_screenshot" src="https://github.com/user-attachments/assets/c425a5ca-ccbe-477b-8d2f-0a39de8afb9c" />
+  <hr>
 <img alt="view_screenshot" src="https://github.com/user-attachments/assets/518d6bb6-a52b-40a4-91dc-8d37dfb5c521" />
 </p>
 
