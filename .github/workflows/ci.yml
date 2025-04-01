@@ -10,6 +10,11 @@ permissions:
 jobs:
   build-test-bump-version:
     runs-on: ubuntu-latest
+    env:
+      VITE_SUPABASE_BASE_URL: ${{ secrets.VITE_SUPABASE_BASE_URL }}
+      VITE_SUPABASE_API_KEY: ${{ secrets.VITE_SUPABASE_API_KEY }}
+      VITE_SUPABASE_DATA_URL: ${{ secrets.VITE_SUPABASE_DATA_URL }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -27,6 +32,12 @@ jobs:
 
       - name: Run tests
         run: yarn test:unit
+
+      - name: Install playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run playwright tests
+        run: npx playwright test
 
       - name: Version bump
         uses: "phips28/gh-action-bump-version@master"
