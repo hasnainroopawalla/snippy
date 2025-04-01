@@ -14,6 +14,7 @@
     "lint": "eslint .",
     "test": "vitest",
     "test:unit": "vitest run",
+    "test:playwright": "npx playwright test",
     "codegen": "DOTENV_CONFIG_PATH=./.env.development graphql-codegen -r dotenv/config --config codegen.ts",
     "stats": "npx vite-bundle-visualizer"
   },
