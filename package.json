@@ -9,7 +9,7 @@
     "install": "yarn codegen",
     "start": "vite",
     "start:test": "vite --mode test",
-    "preview": "vite preview",
+    "preview": "yarn build && vite preview",
     "build": "vite build",
     "lint": "eslint .",
     "test": "vitest",
