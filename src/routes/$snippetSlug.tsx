@@ -25,5 +25,5 @@ export const Route = createFileRoute("/$snippetSlug")({
     return { snippet };
   },
 
-  pendingComponent: () => <span>Loading</span>,
+  pendingComponent: () => <span>Loading</span>, // TODO
 });

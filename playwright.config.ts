@@ -49,7 +49,7 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: "npm run start:test",
+    command: "yarn start:test",
     url: baseURL,
     timeout: 120000,
     reuseExistingServer: !process.env.CI,
