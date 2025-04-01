@@ -2,6 +2,7 @@ import * as React from "react";
 import { TextAnchor } from "./factory";
 import { useNavigate } from "@tanstack/react-router";
 import { ThemeSwitcher } from "./theme-switcher";
+import { config } from "../config";
 
 export const Navbar: React.FC = () => {
   const navigate = useNavigate();
@@ -19,15 +20,15 @@ export const Navbar: React.FC = () => {
           label="New"
           onClick={onClickNew}
         />
-        <TextAnchor
+        {/* <TextAnchor
           testId="navbar-find-anchor"
           label="Find"
           onClick={() => {}}
-        />
+        /> */}
         <TextAnchor
           testId="navbar-help-anchor"
           label="Help"
-          onClick={() => {}}
+          onClick={() => window.open(config.helpUrl, "_blank")}
         />
       </div>
       <ThemeSwitcher />

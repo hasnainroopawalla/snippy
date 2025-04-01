@@ -9,7 +9,7 @@ test.describe("New Snippet Page", () => {
     await expect(page).toHaveTitle(/Snippy/);
 
     await expect(page.getByTestId("navbar-new-anchor")).toBeVisible();
-    await expect(page.getByTestId("navbar-find-anchor")).toBeVisible();
+    // await expect(page.getByTestId("navbar-find-anchor")).toBeVisible();
     await expect(page.getByTestId("navbar-help-anchor")).toBeVisible();
     await expect(page.getByTestId("theme-switcher")).toBeVisible();
   });

@@ -15,6 +15,7 @@ export const SnippetSection: React.FC<SnippetSectionProps> = ({ snippet }) => {
     <div className="flex flex-col gap-6">
       <ViewerToolbar
         privacy={snippet.privacy}
+        content={snippet.content}
         contentViewerRef={contentViewerRef}
       />
       <div className="flex flex-col gap-3">
