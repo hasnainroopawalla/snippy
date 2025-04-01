@@ -1,6 +1,6 @@
 {
   "name": "snippy",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A web app to seamlessly transfer data across devices via shareable URLs",
   "repository": "https://github.com/hasnainroopawalla/snippy",
   "private": true,
