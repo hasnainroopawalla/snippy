@@ -11,6 +11,7 @@ type SelectProps<T extends ISelectItem> = {
   items: T;
   onItemSelect: (item: UnionOfValues<T>) => void;
   selectClassNameOverrides?: string;
+  testId?: string;
 };
 
 const Select = <T extends ISelectItem>({
@@ -18,9 +19,11 @@ const Select = <T extends ISelectItem>({
   onItemSelect,
   initialValue,
   selectClassNameOverrides,
+  testId,
 }: SelectProps<T>) => (
   <SelectFct.Root defaultValue={initialValue} onValueChange={onItemSelect}>
     <SelectFct.Trigger
+      data-testid={`${testId}-button`}
       className={classNames(
         "h-[45px] flex flex-row justify-between text-md items-center gap-2 rounded bg-secondary-bg px-[15px] text-primary-text cursor-pointer focus:outline-accent focus:outline-1",
         selectClassNameOverrides,
@@ -35,7 +38,7 @@ const Select = <T extends ISelectItem>({
       <SelectFct.Viewport className="p-[7px]">
         <SelectFct.Group>
           {Object.entries(items).map(([value, text]) => (
-            <SelectItem key={value} value={text} text={text} />
+            <SelectItem key={value} value={text} text={text} testId={testId} />
           ))}
         </SelectFct.Group>
       </SelectFct.Viewport>
@@ -46,16 +49,19 @@ const Select = <T extends ISelectItem>({
 type SelectItemProps = {
   value: string;
   text: string;
+  testId?: string;
 };
 
-const SelectItem: React.FC<SelectItemProps> = ({ value, text }) => (
+const SelectItem: React.FC<SelectItemProps> = ({ value, text, testId }) => (
   <SelectFct.Item
     value={value}
     className={
       "relative flex h-[25px] select-none items-center rounded p-4 text-md text-primary-text leading-none data-[highlighted]:bg-secondary-bg-offset data-[highlighted]:outline-none cursor-pointer"
     }
   >
-    <SelectFct.ItemText>{text}</SelectFct.ItemText>
+    <SelectFct.ItemText>
+      <span data-testid={`${testId}-label-${value}`}>{text}</span>
+    </SelectFct.ItemText>
   </SelectFct.Item>
 );
 
@@ -67,7 +73,10 @@ export const SelectWithLabel = <T extends ISelectItem>(
   props: SelectWithLabelProps<T>,
 ) => (
   <div className="flex flex-col gap-2">
-    <span className="flex flex-row items-center gap-3 text-secondary-text">
+    <span
+      data-testid={`${props.testId}-label`}
+      className="flex flex-row items-center gap-3 text-secondary-text"
+    >
       {props.label}
     </span>
     <Select {...props} />

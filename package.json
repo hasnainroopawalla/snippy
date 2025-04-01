@@ -8,12 +8,14 @@
   "scripts": {
     "install": "yarn codegen",
     "start": "vite",
-    "preview": "vite preview",
+    "start:test": "vite --mode test",
+    "preview": "yarn build && vite preview",
     "build": "vite build",
     "lint": "eslint .",
     "test": "vitest",
     "test:unit": "vitest run",
-    "codegen": "DOTENV_CONFIG_PATH=./.env.development graphql-codegen -r dotenv/config --config codegen.ts"
+    "codegen": "DOTENV_CONFIG_PATH=./.env.development graphql-codegen -r dotenv/config --config codegen.ts",
+    "stats": "npx vite-bundle-visualizer"
   },
   "files": [
     "dist",
@@ -41,6 +43,7 @@
   "devDependencies": {
     "@eslint/js": "^9.17.0",
     "@graphql-codegen/cli": "^5.0.5",
+    "@playwright/test": "^1.51.1",
     "@tailwindcss/vite": "^4.0.3",
     "@tanstack/router-plugin": "^1.114.25",
     "@testing-library/react": "^16.2.0",

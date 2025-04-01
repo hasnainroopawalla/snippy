@@ -55,6 +55,7 @@ export const ComposerToolbar: React.FC<ComposerToolbarProps> = ({
           selectClassNameOverrides={"w-[150px]"}
           onItemSelect={onSelectValidity}
           initialValue={validity}
+          testId="validity-select"
         />
         <SelectWithLabel
           label="Privacy"
@@ -62,6 +63,7 @@ export const ComposerToolbar: React.FC<ComposerToolbarProps> = ({
           selectClassNameOverrides={"w-[120px]"}
           onItemSelect={onSelectPrivacy}
           initialValue={privacy}
+          testId="privacy-select"
         />
         {privacy !== SnippetPrivacy.Public && (
           <InputWithLabel

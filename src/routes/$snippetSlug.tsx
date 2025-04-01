@@ -3,8 +3,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ViewSnippetScreen, SnippetNotFound } from "../components";
 
 const SnippetPage: React.FC = () => {
-  const { snippetSlug } = Route.useParams();
-
   const { snippet } = Route.useLoaderData();
 
   return (
@@ -27,5 +25,5 @@ export const Route = createFileRoute("/$snippetSlug")({
     return { snippet };
   },
 
-  pendingComponent: () => <span>Loading</span>,
+  pendingComponent: () => <span>Loading</span>, // TODO
 });

@@ -6,6 +6,11 @@ on:
 jobs:
   Pull-Request-CI:
     runs-on: ubuntu-latest
+    env:
+      VITE_SUPABASE_BASE_URL: ${{ secrets.VITE_SUPABASE_BASE_URL }}
+      VITE_SUPABASE_API_KEY: ${{ secrets.VITE_SUPABASE_API_KEY }}
+      VITE_SUPABASE_DATA_URL: ${{ secrets.VITE_SUPABASE_DATA_URL }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -14,7 +19,7 @@ jobs:
         uses: actions/setup-node@v3
 
         with:
-          node-version: "18.x"
+          node-version: "20.x"
 
       - name: Install dependencies
         run: yarn install
@@ -24,6 +29,12 @@ jobs:
 
       - name: Run tests
         run: yarn test:unit
+
+      - name: Install playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run playwright tests
+        run: npx playwright test
 
       - name: Build package
         run: yarn build

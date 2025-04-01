@@ -16,14 +16,19 @@ import type { SlugService } from "./slug-service";
 import type { CryptoService } from "./crypto-service";
 import { addMinutesToDate } from "../utils";
 
+type LightApolloClient = Pick<
+  ApolloClient<NormalizedCacheObject>,
+  "mutate" | "query"
+>;
+
 type SnippetServiceProps = {
-  apolloClient: ApolloClient<NormalizedCacheObject>;
+  apolloClient: LightApolloClient;
   slugService: SlugService;
   cryptoService: CryptoService;
 };
 
 export class SnippetService {
-  private apolloClient: ApolloClient<NormalizedCacheObject>;
+  private apolloClient: LightApolloClient;
   private slugService: SlugService;
   private cryptoService: CryptoService;
 
