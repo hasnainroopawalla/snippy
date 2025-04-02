@@ -32,8 +32,10 @@ export const ButtonsPanel: React.FC<ButtonsPanelProps> = ({
       password: passwordRef.current?.value,
     };
 
+    // TODO: improve this logic
     if (!isValidCreateSnippetData(snippetData)) {
-      contentEditorRef.current?.focus();
+      if (!snippetData.content) contentEditorRef.current?.focus();
+      if (!snippetData.password) passwordRef.current?.focus();
       return;
     }
 
