@@ -1,9 +1,12 @@
 import * as React from "react";
 import { useServices } from "../../contexts";
 import { SnippetPrivacy, type ICreateSnippetFormData } from "../../types";
+import { useNavigate } from "@tanstack/react-router";
 
 export const useCreateSnippet = () => {
   const { snippetService } = useServices();
+
+  const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = React.useState(false);
 
@@ -11,11 +14,21 @@ export const useCreateSnippet = () => {
     async (props: ICreateSnippetFormData) => {
       setIsLoading(true);
 
-      return snippetService.createSnippet(props).finally(() => {
-        setIsLoading(false);
-      });
+      return snippetService
+        .createSnippet(props)
+        .then(snippet => {
+          if (snippet) {
+            navigate({
+              to: "/$snippetSlug",
+              params: { snippetSlug: snippet.slug },
+            });
+          }
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     },
-    [snippetService],
+    [navigate, snippetService],
   );
 
   return { createSnippet, isLoading };
@@ -35,9 +48,6 @@ export const isValidCreateSnippetData = (
       // password should exist if private snippet
       ((snippetData.privacy === SnippetPrivacy.Private &&
         snippetData.password) ||
-        // password should exist if protected snippet
-        (snippetData.privacy === SnippetPrivacy.Protected &&
-          snippetData.password) ||
         // password should not exist if public snippet
         (snippetData.privacy === SnippetPrivacy.Public &&
           !snippetData.password))

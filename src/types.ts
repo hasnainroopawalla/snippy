@@ -22,7 +22,7 @@ export type ISnippet = {
   id: string;
   /* The unique, human readable identifier of the Snippet */
   slug: string;
-  /* The privacy of the snippet - Private/Protected/Public */
+  /* The privacy of the snippet - Private/Public */
   privacy: Privacy;
   /* The raw string content of the Snippet */
   content: string;
@@ -44,10 +44,6 @@ export type ICreateSnippetFormData = {
   | {
       privacy: Privacy.Public;
       password: string | null | undefined;
-    }
-  | {
-      privacy: Privacy.Protected;
-      password: string;
     }
   | {
       privacy: Privacy.Private;

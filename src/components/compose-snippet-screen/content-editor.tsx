@@ -3,7 +3,7 @@ import { CompactButton, Textarea, TextWithIcon } from "../factory";
 import { Pencil2Icon } from "@radix-ui/react-icons";
 
 type ContentEditorProps = {
-  contentEditorRef: React.RefObject<HTMLTextAreaElement>;
+  contentEditorRef: React.RefObject<HTMLTextAreaElement | null>;
 };
 
 export const ContentEditor: React.FC<ContentEditorProps> = ({

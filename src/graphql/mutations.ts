@@ -4,7 +4,7 @@ export const CREATE_SNIPPET_MUTATION = graphql(`
   mutation CreateSnippet(
     $content: String!
     $slug: String!
-    $privacy: privacy!
+    $privacy: Privacy!
     $expires_at: Datetime!
     $passwordHash: String
   ) {

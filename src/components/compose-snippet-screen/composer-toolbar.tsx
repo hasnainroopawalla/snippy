@@ -7,9 +7,9 @@ import {
 } from "../snippet-info-badges";
 
 type ComposerToolbarProps = {
-  validityRef: React.MutableRefObject<SnippetValidity>;
-  privacyRef: React.MutableRefObject<SnippetPrivacy>;
-  passwordRef: React.RefObject<HTMLInputElement>;
+  validityRef: React.RefObject<SnippetValidity>;
+  privacyRef: React.RefObject<SnippetPrivacy>;
+  passwordRef: React.RefObject<HTMLInputElement | null>;
 };
 
 export const ComposerToolbar: React.FC<ComposerToolbarProps> = ({

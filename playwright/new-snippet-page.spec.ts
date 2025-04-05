@@ -48,9 +48,6 @@ test.describe("New Snippet Page", () => {
       page.getByTestId("privacy-select-label-Public").first(),
     ).toBeVisible();
     await expect(
-      page.getByTestId("privacy-select-label-Protected"),
-    ).toBeVisible();
-    await expect(
       page.getByTestId("privacy-select-label-Private"),
     ).toBeVisible();
   });

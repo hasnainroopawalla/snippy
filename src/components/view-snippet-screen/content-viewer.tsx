@@ -7,7 +7,7 @@ import { copyToClipboard } from "../../utils";
 type ContentViewerProps = {
   content: ISnippet["content"];
   slug: ISnippet["slug"];
-  contentViewerRef: React.RefObject<HTMLTextAreaElement>;
+  contentViewerRef: React.RefObject<HTMLTextAreaElement | null>;
 };
 
 export const ContentViewer: React.FC<ContentViewerProps> = ({

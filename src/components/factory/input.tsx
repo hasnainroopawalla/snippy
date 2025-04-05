@@ -2,7 +2,7 @@ import * as React from "react";
 import classNames from "classnames";
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
-  inputRef?: React.RefObject<HTMLInputElement>;
+  inputRef?: React.RefObject<HTMLInputElement | null>;
   classNameOverrides?: string;
 };
 

@@ -52,20 +52,13 @@ const getPrivacyBadgeProps = (privacy: SnippetPrivacy): BadgeWithIconProps => {
     case SnippetPrivacy.Public:
       return {
         color: "green",
-        text: "Everyone • Readonly",
-        IconSlot: <EyeOpenIcon />,
-      };
-
-    case SnippetPrivacy.Protected:
-      return {
-        color: "green",
-        text: "Everyone • Password required to Edit",
+        text: "Everyone • No Password required",
         IconSlot: <EyeOpenIcon />,
       };
     case SnippetPrivacy.Private:
       return {
         color: "orange",
-        text: "No one • Password required to View and Edit",
+        text: "No one • Password required to View",
         IconSlot: <EyeNoneIcon />,
       };
   }

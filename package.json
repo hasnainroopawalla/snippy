@@ -11,7 +11,7 @@
     "start:test": "vite --mode test",
     "preview": "yarn build && vite preview",
     "build": "vite build",
-    "lint": "eslint .",
+    "lint": "tsc --project tsconfig.app.json && eslint .",
     "test": "vitest",
     "test:unit": "vitest run",
     "test:playwright": "npx playwright test",
@@ -38,8 +38,8 @@
     "crypto-browserify": "^3.12.1",
     "graphql": "^16.10.0",
     "prismjs": "^1.29.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
@@ -50,8 +50,8 @@
     "@testing-library/react": "^16.2.0",
     "@types/node": "^22.13.10",
     "@types/prismjs": "^1.26.5",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.1",
     "@typescript-eslint/eslint-plugin": "^8.23.0",
     "@typescript-eslint/parser": "^8.23.0",
     "@vitejs/plugin-react": "^4.3.4",

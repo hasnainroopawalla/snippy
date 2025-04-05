@@ -1,4 +1,4 @@
-import type { ISnippet } from "../../types";
+import { SnippetPrivacy, type ISnippet } from "../../types";
 
 export const isBlockedByPassword = (snippet: ISnippet): boolean =>
-  !!snippet.passwordHash;
+  !!snippet.passwordHash && snippet.privacy === SnippetPrivacy.Private;

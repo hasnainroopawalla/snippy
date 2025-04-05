@@ -7,7 +7,7 @@ import { SnippetPrivacy } from "../../types";
 type ViewerToolbarProps = {
   privacy: SnippetPrivacy;
   content: string;
-  contentViewerRef: React.RefObject<HTMLTextAreaElement>;
+  contentViewerRef: React.RefObject<HTMLTextAreaElement | null>;
 };
 
 export const ViewerToolbar: React.FC<ViewerToolbarProps> = ({
