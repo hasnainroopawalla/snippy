@@ -1,9 +1,13 @@
 import * as React from "react";
 import { CountdownTimerIcon } from "@radix-ui/react-icons";
 import { TextWithIcon } from "../factory";
-import { convertDateToString } from "../../utils";
+import {
+  convertDateToString,
+  convertUTCDateStringToLocalDate,
+} from "../../utils";
 
 type SnippetMetadataProps = {
+  // Snippet expiry date string in UTC.
   expiresAt: string;
 };
 
@@ -11,7 +15,7 @@ export const SnippetMetadata: React.FC<SnippetMetadataProps> = ({
   expiresAt,
 }) => {
   const expiresAtDateString = React.useMemo(
-    () => convertDateToString(new Date(expiresAt)),
+    () => convertDateToString(convertUTCDateStringToLocalDate(expiresAt)),
     [expiresAt],
   );
 

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { convertDateToString } from "./date";
+import { convertDateToString, convertUTCDateStringToLocalDate } from "./date";
 
 describe("convertDateToString", () => {
   it("should format the date correctly", () => {
@@ -28,5 +28,23 @@ describe("convertDateToString", () => {
     const formattedDate = convertDateToString(date);
 
     expect(formattedDate).toBe("June 15 at 14:30");
+  });
+});
+
+describe("convertUTCDateStringToLocalDate", () => {
+  it("should handle a UTC string with Z", () => {
+    const utcDateString = "2025-04-05T15:24:16.499Z";
+    const result = convertUTCDateStringToLocalDate(utcDateString);
+
+    expect(result).toBeInstanceOf(Date);
+    expect(result.toISOString()).toBe(utcDateString); // Remains the same in ISO string
+  });
+
+  it("should handle a UTC string without Z", () => {
+    const utcDateString = "2025-04-05T15:24:16.499";
+    const result = convertUTCDateStringToLocalDate(utcDateString);
+
+    expect(result).toBeInstanceOf(Date);
+    expect(result.toISOString()).toBe(`${utcDateString}Z`);
   });
 });

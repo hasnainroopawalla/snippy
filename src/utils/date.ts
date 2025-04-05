@@ -19,3 +19,13 @@ export const convertDateToString = (date: Date) =>
     // second: "2-digit",
     hour12: false,
   });
+
+export const convertUTCDateStringToLocalDate = (
+  utcDateString: string,
+): Date => {
+  const normalizedUtcDateString = utcDateString.endsWith("Z")
+    ? utcDateString
+    : `${utcDateString}Z`;
+
+  return new Date(normalizedUtcDateString);
+};
