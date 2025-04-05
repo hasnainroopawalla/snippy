@@ -28,7 +28,7 @@ export const TextWithIcon: React.FC<TextWithIconProps> = ({
 
 type TextAnchorProps = {
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
   testId?: string;
 };
 

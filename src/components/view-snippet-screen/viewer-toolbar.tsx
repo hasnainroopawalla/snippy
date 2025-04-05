@@ -1,8 +1,9 @@
 import * as React from "react";
-import { DynamicCompactButton, TextAnchor } from "../factory";
+import { Dialog, DynamicCompactButton, TextAnchor } from "../factory";
 import { copyToClipboard, openRawContent } from "../../utils";
 import { SnippetPrivacyBadge } from "../snippet-info-badges";
 import { SnippetPrivacy } from "../../types";
+import { SnippetQRCode } from "../snippet-url-qr-code";
 
 type ViewerToolbarProps = {
   privacy: SnippetPrivacy;
@@ -41,7 +42,10 @@ export const ViewerToolbar: React.FC<ViewerToolbarProps> = ({
           postClickText="Copied!"
         />
         <TextAnchor label="Raw" onClick={onRawClick} />
-        {/* <TextAnchor label="QR" onClick={() => {}} /> */}
+        <Dialog
+          TriggerSlot={<TextAnchor label="QR" />}
+          ContentSlot={<SnippetQRCode value={window.location.href} />}
+        />
       </div>
       <SnippetPrivacyBadge privacy={privacy} />
     </div>
