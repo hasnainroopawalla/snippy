@@ -98,3 +98,21 @@ export const DynamicCompactButton: React.FC<DynamicCompactButtonProps> = ({
     />
   );
 };
+
+type IconButtonProps = {
+  onClick?: () => void;
+  IconSlot: React.ReactElement;
+};
+
+export const IconButton: React.FC<IconButtonProps> = ({
+  onClick,
+  IconSlot,
+}) => (
+  <div
+    data-testid="theme-switcher"
+    className="p-2 rounded-lg cursor-pointer hover:bg-secondary-bg"
+    onClick={onClick}
+  >
+    {IconSlot}
+  </div>
+);

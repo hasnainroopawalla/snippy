@@ -1,13 +1,17 @@
 import * as React from "react";
-import { TextAnchor } from "./factory";
+import { TextAnchor } from "../factory";
 import { useNavigate } from "@tanstack/react-router";
-import { ThemeSwitcher } from "./theme-switcher";
-import { config } from "../config";
+import { ThemeSwitcher } from "../theme-switcher";
+import { config } from "../../config";
+import { UsageMetricsButton } from "./usage-metrics-button";
+import { useGetTotalSnippetsCount } from "./use-get-total-snippets-count";
 
 export const Navbar: React.FC = () => {
   const navigate = useNavigate();
 
   const onClickNew = React.useCallback(() => navigate({ to: "/" }), [navigate]);
+
+  const { totalSnippetsCount } = useGetTotalSnippetsCount();
 
   return (
     <div className="flex flex-row flex-wrap items-center justify-between gap-4">
@@ -20,18 +24,18 @@ export const Navbar: React.FC = () => {
           label="New"
           onClick={onClickNew}
         />
-        {/* <TextAnchor
-          testId="navbar-find-anchor"
-          label="Find"
-          onClick={() => {}}
-        /> */}
         <TextAnchor
           testId="navbar-help-anchor"
           label="Help"
           onClick={() => window.open(config.helpUrl, "_blank")}
         />
       </div>
-      <ThemeSwitcher />
+      <div className="flex flex-row gap-2">
+        {totalSnippetsCount && (
+          <UsageMetricsButton totalSnippetsCount={totalSnippetsCount} />
+        )}
+        <ThemeSwitcher />
+      </div>
     </div>
   );
 };

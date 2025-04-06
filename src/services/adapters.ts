@@ -2,8 +2,9 @@ import { ApolloQueryResult, FetchResult } from "@apollo/client";
 import {
   CreateSnippetMutation,
   GetSnippetByIdQuery,
+  GetUsageMetricsQuery,
 } from "../graphql/generated";
-import type { ISnippet } from "../types";
+import type { ISnippet, IUsageMetrics } from "../types";
 
 export const QueryResultAdapters = {
   /**
@@ -32,6 +33,25 @@ export const QueryResultAdapters = {
       // validity: snippetData.validity,
       slug: snippetData.slug,
       passwordHash: snippetData.password_hash,
+    };
+  },
+
+  getUsageMetrics: (
+    result: ApolloQueryResult<GetUsageMetricsQuery>,
+  ): IUsageMetrics | null => {
+    if (
+      !result.data.usage_metricsCollection ||
+      !result.data.usage_metricsCollection.edges ||
+      result.data.usage_metricsCollection.edges.length === 0
+    ) {
+      return null;
+    }
+
+    // Return the first element of the array since each entry in the DB has a unique ID (primary key).
+    const usageMetrics = result.data.usage_metricsCollection.edges[0].node;
+
+    return {
+      totalSnippetsCount: Number(usageMetrics.total_snippets_count),
     };
   },
 };

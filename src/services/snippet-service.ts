@@ -4,6 +4,7 @@ import {
   CREATE_SNIPPET_MUTATION,
   GET_SNIPPET_BY_ID_QUERY,
   GET_SNIPPET_BY_SLUG_QUERY,
+  GET_USAGE_METRICS_QUERY,
 } from "../graphql";
 import {
   validityToMinutesMap,
@@ -94,7 +95,11 @@ export class SnippetService {
       .then(result => QueryResultAdapters.getSnippet(result));
   }
 
-  public deleteSnippet() {}
+  public async getUsageMetrics() {
+    return this.apolloClient
+      .query({ query: GET_USAGE_METRICS_QUERY })
+      .then(result => QueryResultAdapters.getUsageMetrics(result));
+  }
 
   /**
    * Encrypts the content with the password string and then hashes the password.

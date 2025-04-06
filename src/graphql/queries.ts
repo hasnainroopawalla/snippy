@@ -35,3 +35,15 @@ export const GET_SNIPPET_BY_SLUG_QUERY = graphql(`
     }
   }
 `);
+
+export const GET_USAGE_METRICS_QUERY = graphql(`
+  query GetUsageMetrics {
+    usage_metricsCollection {
+      edges {
+        node {
+          total_snippets_count
+        }
+      }
+    }
+  }
+`);

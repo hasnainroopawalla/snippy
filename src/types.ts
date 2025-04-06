@@ -57,3 +57,7 @@ export type ICreateSnippetFormData = {
 export type ICreateSnippetData = ICreateSnippetFormData & {
   slug: ISnippet["slug"];
 };
+
+export type IUsageMetrics = {
+  totalSnippetsCount: number;
+};
